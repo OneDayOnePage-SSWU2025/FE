@@ -12,19 +12,18 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:orientation="vertical"
-        android:gravity="center_horizontal">
+        android:gravity="center_horizontal"
+        android:orientation="vertical">
 
         <!-- 상단 로고 사이즈 통일해야할듯?  -->
         <ImageView
             android:id="@+id/ivLogo"
             android:layout_width="140dp"
             android:layout_height="wrap_content"
-            android:adjustViewBounds="true"
-            android:src="@drawable/side_logo"
             android:layout_gravity="start"
             android:layout_margin="20dp"
-            />
+            android:adjustViewBounds="true"
+            android:src="@drawable/side_logo" />
 
         <androidx.viewpager2.widget.ViewPager2
             android:id="@+id/viewPagerScene"
@@ -106,20 +105,23 @@
             android:layout_gravity="center_horizontal"
             android:layout_marginTop="50dp"
             android:orientation="horizontal">
+
             <View
                 android:layout_width="8dp"
                 android:layout_height="8dp"
-                android:background="@drawable/dot_active"
-                android:layout_marginEnd="10dp"/>
+                android:layout_marginEnd="10dp"
+                android:background="@drawable/dot_active" />
+
             <View
                 android:layout_width="8dp"
                 android:layout_height="8dp"
-                android:background="@drawable/dot_inactive"
-                android:layout_marginEnd="10dp"/>
+                android:layout_marginEnd="10dp"
+                android:background="@drawable/dot_inactive" />
+
             <View
                 android:layout_width="8dp"
                 android:layout_height="8dp"
-                android:background="@drawable/dot_inactive"/>
+                android:background="@drawable/dot_inactive" />
         </LinearLayout>
     </LinearLayout>
 </LinearLayout>
