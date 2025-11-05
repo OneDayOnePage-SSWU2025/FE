@@ -1,1 +1,74 @@
-/build
+# Android Studio / IntelliJ
+.idea/
+*.iml
+*.ipr
+*.iws
+
+# Gradle
+.gradle/
+build/
+**/build/
+!gradle/wrapper/gradle-wrapper.jar
+
+# Local configuration file (sdk path, etc)
+local.properties
+
+# Log files
+*.log
+
+# OS generated files
+.DS_Store
+Thumbs.db
+
+# Android specific
+/captures/
+/outputs/
+/*.apk
+/*.ap_
+
+# Keystore files
+*.jks
+*.keystore
+
+# Google Services (contains API keys)
+google-services.json
+
+# Firebase Crashlytics
+crashlytics-build.properties
+
+# NDK
+.obj/
+.externalNativeBuild/
+.cxx/
+
+# Kotlin
+*.kotlin_module
+
+# Misc
+/.idea/caches
+/.idea/libraries
+/.idea/modules.xml
+/.idea/workspace.xml
+/.idea/navEditor.xml
+/.idea/assetWizardSettings.xml
+
+# Temporary files
+*.tmp
+*.temp
+*.bak
+*.swp
+
+# Jetpack Compose preview cache
+/.idea/previewCachedImages/
+
+# Android Studio generated local test result files
+/test-results/
+
+# Ignore generated files
+generated/
+
+# Android Gradle Plugin profiling
+/.gradle/buildOutputCleanup/
+
+# Ignore signing configs
+signing/
