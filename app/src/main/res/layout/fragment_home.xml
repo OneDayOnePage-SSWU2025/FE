@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.core.widget.NestedScrollView
+<LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
@@ -11,7 +11,7 @@
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="match_parent"
         android:orientation="vertical"
         android:gravity="center_horizontal">
 
@@ -26,8 +26,15 @@
             android:layout_margin="20dp"
             />
 
+        <androidx.viewpager2.widget.ViewPager2
+            android:id="@+id/viewPagerScene"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:orientation="horizontal" />
 
-        <!-- 상단 그라데이션 카드 (통계) -->
+
+        <!--
         <com.google.android.material.card.MaterialCardView
             android:layout_width="match_parent"
             android:layout_height="156dp"
@@ -66,15 +73,13 @@
         <FrameLayout
             android:id="@+id/layoutScene"
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
-
-
+            android:layout_height="wrap_content">
 
             <com.google.android.material.card.MaterialCardView
                 android:id="@+id/cardScene"
                 android:layout_width="351dp"
                 android:layout_height="324dp"
-                android:layout_marginTop="20dp"
+                android:layout_marginTop="50dp"
                 android:layout_gravity="center_horizontal"
                 app:cardCornerRadius="40dp">
                 <ImageView
@@ -90,16 +95,16 @@
                     android:layout_height="400dp"
                     android:layout_gravity="center"
                     android:rotation="20"
-                    tools:src="@drawable/monkey_adult" />
+                    android:src="@drawable/monkey_adult" />
 
             </com.google.android.material.card.MaterialCardView>
-        </FrameLayout>
+        </FrameLayout>상단 그라데이션 카드 (통계) -->
         <LinearLayout
             android:id="@+id/indicator"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="16dp"
             android:layout_gravity="center_horizontal"
+            android:layout_marginTop="50dp"
             android:orientation="horizontal">
             <View
                 android:layout_width="8dp"
@@ -117,4 +122,4 @@
                 android:background="@drawable/dot_inactive"/>
         </LinearLayout>
     </LinearLayout>
-</androidx.core.widget.NestedScrollView>
+</LinearLayout>
