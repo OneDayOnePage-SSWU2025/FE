@@ -43,6 +43,7 @@ public class SignupActivity extends AppCompatActivity {
                     selectedProfileUri = uri;
                     profilePreview.setImageURI(uri);
                     profilePreview.setVisibility(View.VISIBLE);
+                    addProfileBtn.setVisibility(View.GONE);
                     updateButtonEnabled();
                 }
             });

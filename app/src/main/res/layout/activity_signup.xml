@@ -2,6 +2,7 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical"
     android:gravity="center_horizontal"
     android:id="@+id/main"
@@ -28,113 +29,116 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical"
-            android:gravity="center_horizontal">
+            android:gravity="center_horizontal"
+            android:orientation="vertical">
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="30dp"
-                android:textSize="18sp"
-                android:text="아이디를 입력해주세요"/>
+                android:text="아이디를 입력해주세요"
+                android:textSize="18sp" />
 
             <EditText
                 android:id="@+id/inputId"
                 android:layout_width="333dp"
                 android:layout_height="57dp"
                 android:layout_marginTop="20dp"
-                android:hint="id"
-                android:paddingHorizontal="16dp"
                 android:background="@drawable/et_bg_round"
                 android:backgroundTint="@color/et_tint_selector"
+                android:hint="id"
                 android:imeOptions="actionDone"
-                android:singleLine="true"/>
+                android:paddingHorizontal="16dp"
+                android:singleLine="true" />
+
         </LinearLayout>
 
         <!-- 비밀번호 단계 -->
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical"
-            android:gravity="center_horizontal">
+            android:gravity="center_horizontal"
+            android:orientation="vertical">
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="30dp"
-                android:textSize="18sp"
-                android:text="비밀번호를 입력해주세요"/>
+                android:text="비밀번호를 입력해주세요"
+                android:textSize="18sp" />
 
             <EditText
                 android:id="@+id/inputPwd"
                 android:layout_width="333dp"
                 android:layout_height="57dp"
                 android:layout_marginTop="20dp"
-                android:hint="8글자 이상"
-                android:paddingHorizontal="16dp"
                 android:background="@drawable/et_bg_round"
                 android:backgroundTint="@color/et_tint_selector"
+                android:hint="8글자 이상"
                 android:imeOptions="actionDone"
-                android:singleLine="true"/>
+                android:paddingHorizontal="16dp"
+                android:singleLine="true" />
         </LinearLayout>
 
         <!-- 닉네임 단계 -->
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical"
-            android:gravity="center_horizontal">
+            android:gravity="center_horizontal"
+            android:orientation="vertical">
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="30dp"
-                android:textSize="18sp"
-                android:text="닉네임을 입력해 주세요"/>
+                android:text="닉네임을 입력해 주세요"
+                android:textSize="18sp" />
 
             <EditText
                 android:id="@+id/inputNic"
                 android:layout_width="333dp"
                 android:layout_height="57dp"
                 android:layout_marginTop="20dp"
-                android:hint="하루"
-                android:paddingHorizontal="16dp"
                 android:background="@drawable/et_bg_round"
                 android:backgroundTint="@color/et_tint_selector"
+                android:hint="하루"
                 android:imeOptions="actionDone"
-                android:singleLine="true"/>
+                android:paddingHorizontal="16dp"
+                android:singleLine="true" />
         </LinearLayout>
 
         <!-- 프로필 단계 -->
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical"
-            android:gravity="center_horizontal">
+            android:gravity="center_horizontal"
+            android:orientation="vertical">
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="30dp"
-                android:textSize="18sp"
-                android:text="프로필 이미지를 추가해 주세요"/>
+                android:text="프로필 이미지를 추가해 주세요"
+                android:textSize="18sp" />
 
             <ImageButton
                 android:id="@+id/addProfileBtn"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="20dp"
+                android:layout_marginTop="30dp"
                 android:background="@null"
                 android:foreground="@null"
                 android:src="@drawable/ic_add_profile" />
 
-            <!-- 선택된 이미지 미리보기 -->
-            <ImageView
+            <com.google.android.material.imageview.ShapeableImageView
                 android:id="@+id/profilePreview"
-                android:layout_width="100dp"
-                android:layout_height="100dp"
-                android:layout_marginTop="16dp"
-                android:visibility="gone" />
+                android:visibility="gone"
+                android:layout_width="300dp"
+                android:layout_height="300dp"
+                android:layout_marginTop="30dp"
+                app:shapeAppearanceOverlay="@style/CircleImage"
+                app:strokeColor="#A9B575"
+                app:strokeWidth="3dp" />
         </LinearLayout>
 
     </ViewFlipper>
