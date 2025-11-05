@@ -10,23 +10,26 @@
     android:background="@color/background"
     tools:context=".MainActivity">
 
-    <LinearLayout
+    <FrameLayout
+        android:id="@+id/main_frame"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="1"
-        >
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toTopOf="@id/main_bottom" />
 
-    </LinearLayout>
 
 
     <com.google.android.material.bottomnavigation.BottomNavigationView
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="100dp"
         android:id="@+id/main_bottom"
         app:itemIconSize="30dp"
         android:paddingTop="20dp"
         android:background="@drawable/bgc_bottombar"
         app:labelVisibilityMode="unlabeled"
+        app:itemRippleColor="@android:color/transparent"
+        app:itemActiveIndicatorStyle="@null"
         app:menu="@menu/menu"/>
 
 </LinearLayout>

@@ -1,20 +1,22 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
+
     >
     <item
         android:id="@+id/bottom_bookRoom"
-        android:icon="@drawable/ic_bookroom"
+        android:icon="@drawable/ic_bookroom_selector"
         android:enabled="true"
         android:title="독서룸"
         />
     <item
         android:id="@+id/bottom_home"
-        android:icon="@drawable/ic_home"
+        android:icon="@drawable/ic_home_selector"
         android:enabled="true"
+        android:checked="true"
         android:title="홈"/>
     <item
         android:id="@+id/bottom_my"
-        android:icon="@drawable/ic_mypage"
+        android:icon="@drawable/ic_mypage_selector"
         android:enabled="true"
         android:title="마이페이지"/>
 
