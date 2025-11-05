@@ -38,7 +38,7 @@ public class HomeFragment extends Fragment {
                 R.drawable.monkey_baby,
                 R.drawable.monkey_egg
         );
-        List<String> clubNames = Arrays.asList("게롱단", "쇼비즈니스맙소사", "착 한 아 이");
+        List<String> clubNames = Arrays.asList("룩키마트에 어서오세요", "쇼비즈니스맙소사", "착 한 아 이");
         List<String> ranks = Arrays.asList("상위 18%", "상위 23%", "상위 10%");
 
         HomePagerAdapter adapter = new HomePagerAdapter(characterList, clubNames, ranks);
