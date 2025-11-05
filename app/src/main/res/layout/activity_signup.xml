@@ -5,15 +5,30 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical"
     android:gravity="center_horizontal"
-    android:id="@+id/main"
-    android:paddingTop="20dp">
+    android:background="@color/background"
+    android:id="@+id/main">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/white">
+        <ImageButton
+            android:id="@+id/backBtn"
+            android:layout_width="48dp"
+            android:layout_height="48dp"
+            android:layout_marginLeft="10dp"
+            android:layout_marginTop="5dp"
+            android:layout_marginBottom="5dp"
+            android:background="@android:color/transparent"
+            android:src="@drawable/ic_nav_arrow_left"/>
+    </LinearLayout>
 
     <ProgressBar
         android:id="@+id/progBar"
         style="?android:progressBarStyleHorizontal"
         android:layout_width="355dp"
         android:layout_height="5dp"
-        android:layout_marginTop="10dp"
+        android:layout_marginTop="40dp"
         android:max="100"
         android:scaleY="3"
         android:progressDrawable="@drawable/progress"
@@ -147,7 +162,7 @@
         android:id="@+id/checkBtn"
         android:layout_width="328dp"
         android:layout_height="64dp"
-        android:layout_marginTop="200dp"
+        android:layout_marginTop="100dp"
         android:text="확인"
         android:enabled="false"
         android:backgroundTint="@color/btn_tint_selector"/>
