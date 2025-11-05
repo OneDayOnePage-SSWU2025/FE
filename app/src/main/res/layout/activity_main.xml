@@ -1,41 +1,35 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    android:gravity="center"
+    android:background="@color/background"
     tools:context=".MainActivity">
 
-    <ImageView
-        android:layout_width="229dp"
-        android:layout_height="269.89dp"
-        android:layout_marginTop="100dp"
-        android:src="@drawable/vertical_logo"/>
+    <FrameLayout
+        android:id="@+id/main_frame"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toTopOf="@id/main_bottom" />
 
-    <Button
-        android:id="@+id/loginBtn"
-        android:layout_width="328dp"
-        android:layout_height="64dp"
-        android:layout_marginTop="150dp"
-        android:textSize="20dp"
-        android:backgroundTint="#57855E"
-        android:text="login"/>
 
-    <LinearLayout
-        android:layout_width="328dp"
-        android:layout_height="wrap_content">
-        <Button
-            android:id="@+id/signupBtn"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:background="@android:color/transparent"
-            android:textColor="@color/black"
-            android:textSize="16dp"
-            android:text="sign up"/>
-    </LinearLayout>
 
+    <com.google.android.material.bottomnavigation.BottomNavigationView
+        android:layout_width="match_parent"
+        android:layout_height="100dp"
+        android:id="@+id/main_bottom"
+        app:itemIconSize="30dp"
+        android:paddingTop="20dp"
+        android:background="@drawable/bgc_bottombar"
+        app:labelVisibilityMode="unlabeled"
+        app:itemRippleColor="@android:color/transparent"
+        app:itemActiveIndicatorStyle="@null"
+        app:menu="@menu/menu"/>
 
 </LinearLayout>
