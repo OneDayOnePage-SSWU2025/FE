@@ -1,0 +1,170 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:gravity="center_horizontal"
+    android:background="@color/background"
+    android:id="@+id/main">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/white">
+        <ImageButton
+            android:id="@+id/backBtn"
+            android:layout_width="48dp"
+            android:layout_height="48dp"
+            android:layout_marginLeft="10dp"
+            android:layout_marginTop="5dp"
+            android:layout_marginBottom="5dp"
+            android:background="@android:color/transparent"
+            android:src="@drawable/ic_nav_arrow_left"/>
+    </LinearLayout>
+
+    <ProgressBar
+        android:id="@+id/progBar"
+        style="?android:progressBarStyleHorizontal"
+        android:layout_width="355dp"
+        android:layout_height="5dp"
+        android:layout_marginTop="40dp"
+        android:max="100"
+        android:scaleY="3"
+        android:progressDrawable="@drawable/progress"
+        android:progress="0" />
+
+
+    <ViewFlipper
+        android:id="@+id/viewFlipper"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <!-- 아이디 단계 -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center_horizontal"
+            android:orientation="vertical">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="30dp"
+                android:text="아이디를 입력해주세요"
+                android:textSize="18sp" />
+
+            <EditText
+                android:id="@+id/inputId"
+                android:layout_width="333dp"
+                android:layout_height="57dp"
+                android:layout_marginTop="20dp"
+                android:background="@drawable/et_bg_round"
+                android:backgroundTint="@color/et_tint_selector"
+                android:hint="id"
+                android:imeOptions="actionDone"
+                android:paddingHorizontal="16dp"
+                android:singleLine="true" />
+
+        </LinearLayout>
+
+        <!-- 비밀번호 단계 -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center_horizontal"
+            android:orientation="vertical">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="30dp"
+                android:text="비밀번호를 입력해주세요"
+                android:textSize="18sp" />
+
+            <EditText
+                android:id="@+id/inputPwd"
+                android:layout_width="333dp"
+                android:layout_height="57dp"
+                android:layout_marginTop="20dp"
+                android:background="@drawable/et_bg_round"
+                android:backgroundTint="@color/et_tint_selector"
+                android:hint="8글자 이상"
+                android:imeOptions="actionDone"
+                android:paddingHorizontal="16dp"
+                android:singleLine="true" />
+        </LinearLayout>
+
+        <!-- 닉네임 단계 -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center_horizontal"
+            android:orientation="vertical">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="30dp"
+                android:text="닉네임을 입력해 주세요"
+                android:textSize="18sp" />
+
+            <EditText
+                android:id="@+id/inputNic"
+                android:layout_width="333dp"
+                android:layout_height="57dp"
+                android:layout_marginTop="20dp"
+                android:background="@drawable/et_bg_round"
+                android:backgroundTint="@color/et_tint_selector"
+                android:hint="하루"
+                android:imeOptions="actionDone"
+                android:paddingHorizontal="16dp"
+                android:singleLine="true" />
+        </LinearLayout>
+
+        <!-- 프로필 단계 -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center_horizontal"
+            android:orientation="vertical">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="30dp"
+                android:text="프로필 이미지를 추가해 주세요"
+                android:textSize="18sp" />
+
+            <ImageButton
+                android:id="@+id/addProfileBtn"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="30dp"
+                android:background="@null"
+                android:foreground="@null"
+                android:src="@drawable/ic_add_profile" />
+
+            <com.google.android.material.imageview.ShapeableImageView
+                android:id="@+id/profilePreview"
+                android:visibility="gone"
+                android:layout_width="300dp"
+                android:layout_height="300dp"
+                android:layout_marginTop="30dp"
+                app:shapeAppearanceOverlay="@style/CircleImage"
+                app:strokeColor="#A9B575"
+                app:strokeWidth="3dp" />
+        </LinearLayout>
+
+    </ViewFlipper>
+
+    <Button
+        android:id="@+id/checkBtn"
+        android:layout_width="328dp"
+        android:layout_height="64dp"
+        android:layout_marginTop="100dp"
+        android:text="확인"
+        android:enabled="false"
+        android:backgroundTint="@color/btn_tint_selector"/>
+
+</LinearLayout>
