@@ -8,10 +8,8 @@
     <color name="green1">#BCE596</color>
     <color name="darkgreen">#A9B575</color>
     <color name="deepgreen">#57855E</color>
+    <color name="gray">#D9D9D9</color>
 
-    <color name="bg_cream">#FFFDF5</color>
-    <color name="dot_active">#C5DA76</color>   <!-- 연녹색 -->
-    <color name="dot_inactive">#D9D9D9</color> <!-- 회색 -->
-    <color name="grad_start">#B9D59E</color>  <!-- 좌측 그라데이션 -->
-    <color name="grad_end">#6B8D6E</color>    <!-- 우측 그라데이션 -->
+    <color name="grad_start">#B9D59E</color>  <!-- 좌측 그라 -->
+    <color name="grad_end">#6B8D6E</color>    <!-- 우측 그라-->
 </resources>
