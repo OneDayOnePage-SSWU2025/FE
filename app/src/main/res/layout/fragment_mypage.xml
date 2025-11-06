@@ -72,7 +72,7 @@
             android:text="나는 총 19권의 \n책을 읽었어요"
             android:gravity="right"
             android:textColor="#FFFFF5"
-            android:layout_marginLeft="58dp"
+            android:layout_marginLeft="43dp"
             android:layout_toRightOf="@id/bookIcon1"
             android:layout_alignBottom="@id/bookIcon1"
             android:textSize="20sp"/>
@@ -114,7 +114,7 @@
             android:text="나는 총 19개의 \n메모를 남겼어요"
             android:gravity="right"
             android:textColor="#FFFFF5"
-            android:layout_marginLeft="60dp"
+            android:layout_marginLeft="45dp"
             android:layout_toRightOf="@id/bookIcon2"
             android:layout_alignBottom="@id/bookIcon2"
             android:layout_marginBottom="20dp"
