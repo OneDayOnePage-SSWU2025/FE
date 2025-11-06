@@ -11,6 +11,21 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.OneDayOnePaper">
+
+        <activity
+            android:name=".LauncherActivity"
+            android:exported="true">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+            <!-- (선택) Android 12 SplashScreen API 쓰면 여기서 스플래시 테마 지정 -->
+            <!-- android:theme="@style/Theme.App.Splash" -->
+        </activity>
+
+        <activity
+            android:name=".OnboardingActivity"
+            android:exported="false" />
         <activity
             android:name=".MakeGroupActivity"
             android:exported="true" />

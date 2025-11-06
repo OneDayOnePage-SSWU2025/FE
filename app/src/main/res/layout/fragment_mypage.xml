@@ -1,13 +1,124 @@
 <?xml version="1.0" encoding="utf-8"?>
-<!-- res/layout/fragment_home.xml -->
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:gravity="center"
-    android:orientation="vertical">
+    android:orientation="vertical"
+    android:gravity="center_horizontal"
+    android:background="@color/background">
+
+    <com.google.android.material.imageview.ShapeableImageView
+        android:id="@+id/profilePreview"
+        android:layout_width="145dp"
+        android:layout_height="145dp"
+        android:layout_marginTop="5dp"
+        android:layout_marginBottom="5dp"
+        android:scaleType="centerCrop"
+        android:src="@drawable/test_profile"
+        app:shapeAppearanceOverlay="@style/CircleImage" />
+
     <TextView
-        android:layout_height="wrap_content"
+        android:id="@+id/reportId"
         android:layout_width="wrap_content"
-        android:text="마이페이지 화면"
-        android:textSize="20sp"/>
+        android:layout_height="wrap_content"
+        android:text="유우시 사랑해 님의 독서리포트"
+        android:textSize="18sp"
+        android:layout_marginTop="5dp"
+        android:layout_gravity="center"/>
+
+    <Button
+        android:id="@+id/infoEditBtn"
+        android:layout_width="wrap_content"
+        android:layout_height="35dp"
+        android:text="내 정보 수정하기"
+        android:textColor="@color/gray"
+        android:textSize="12sp"
+        android:layout_marginBottom="10dp"
+        android:background="@android:color/transparent"
+        android:layout_gravity="center"/>
+
+    <!-- 책장 카드 -->
+    <RelativeLayout
+        android:layout_width="346.67dp"
+        android:layout_height="156dp"
+        android:layout_gravity="center"
+        android:background="@drawable/bg_report_bookcase"
+        android:clipToOutline="true">
+
+        <TextView
+            android:id="@+id/bookTxt1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="17.33sp"
+            android:text="나의 책장은?"
+            android:textStyle="bold"
+            android:layout_marginTop="18dp"
+            android:layout_marginLeft="18dp"
+            android:textColor="#FFFFF5"/>
+
+        <ImageView
+            android:id="@+id/bookIcon1"
+            android:layout_width="116dp"
+            android:layout_height="75dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginLeft="18dp"
+            android:layout_below="@id/bookTxt1"
+            android:src="@drawable/ic_book"/>
+
+        <TextView
+            android:id="@+id/bookCountTxt"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="나는 총 19권의 \n책을 읽었어요"
+            android:gravity="right"
+            android:textColor="#FFFFF5"
+            android:layout_marginLeft="43dp"
+            android:layout_toRightOf="@id/bookIcon1"
+            android:layout_alignBottom="@id/bookIcon1"
+            android:textSize="20sp"/>
+    </RelativeLayout>
+
+    <!-- 메모 카드 -->
+    <RelativeLayout
+        android:layout_width="346.67dp"
+        android:layout_height="156dp"
+        android:layout_gravity="center"
+        android:background="@drawable/bg_report_bookmemo"
+        android:layout_marginTop="20dp"
+        android:clipToOutline="true">
+
+        <TextView
+            android:id="@+id/bookTxt2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="17.33sp"
+            android:text="나의 독서 메모는 얼마나 쌓였을까?"
+            android:textStyle="bold"
+            android:layout_marginTop="18dp"
+            android:layout_marginLeft="18dp"
+            android:textColor="#FFFFF5"/>
+
+        <ImageView
+            android:id="@+id/bookIcon2"
+            android:layout_width="96dp"
+            android:layout_height="96dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginLeft="28dp"
+            android:layout_below="@id/bookTxt2"
+            android:src="@drawable/ic_messages"/>
+
+        <TextView
+            android:id="@+id/memoCountTxt"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="나는 총 19개의 \n메모를 남겼어요"
+            android:gravity="right"
+            android:textColor="#FFFFF5"
+            android:layout_marginLeft="45dp"
+            android:layout_toRightOf="@id/bookIcon2"
+            android:layout_alignBottom="@id/bookIcon2"
+            android:layout_marginBottom="20dp"
+            android:textSize="20sp"/>
+    </RelativeLayout>
+
 </LinearLayout>
