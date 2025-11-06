@@ -14,6 +14,15 @@ public class EditInfoFragment extends Fragment {
             ViewGroup container,
             Bundle savedInstanceState
     ) {
-        return inflater.inflate(R.layout.fragment_edit_info, container, false);
+        View view = inflater.inflate(R.layout.fragment_edit_info, container, false);
+
+        view.findViewById(R.id.infoEditBtn).setOnClickListener(v -> {
+            //이전 프래그먼트로 돌아가기
+            requireActivity()
+                    .getSupportFragmentManager()
+                    .popBackStack();
+        });
+
+        return view;
     }
 }

@@ -15,6 +15,7 @@
         android:padding="15dp">
         
         <ImageButton
+            android:id="@+id/infoEditBtn"
             android:layout_width="40dp"
             android:layout_height="40dp"
             android:background="@android:color/transparent"
