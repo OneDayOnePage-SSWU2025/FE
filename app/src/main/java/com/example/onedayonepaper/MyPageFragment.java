@@ -17,5 +17,16 @@ public class MyPageFragment extends Fragment {
                              @Nullable Bundle savedInstanceState) {
         return inflater.inflate(R.layout.fragment_mypage, container, false);
     }
+
+    @Override
+    public void onViewCreated(@NonNull View v, @Nullable Bundle savedInstanceState) {
+        v.findViewById(R.id.infoEditBtn).setOnClickListener(view -> {
+            requireActivity().getSupportFragmentManager().beginTransaction()
+                    .setReorderingAllowed(true)
+                    .replace(R.id.main_frame, new EditInfoFragment())
+                    .addToBackStack("edit_profile")
+                    .commit();
+        });
+    }
 }
 
