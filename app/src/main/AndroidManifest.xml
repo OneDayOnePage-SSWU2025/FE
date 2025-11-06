@@ -12,6 +12,9 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.OneDayOnePaper">
         <activity
+            android:name=".MakeGroupActivity"
+            android:exported="true" />
+        <activity
             android:name=".SignupActivity"
             android:exported="false" />
         <activity
