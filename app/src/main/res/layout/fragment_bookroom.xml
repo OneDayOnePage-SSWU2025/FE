@@ -10,4 +10,9 @@
         android:layout_width="wrap_content"
         android:text="독서룸 화면"
         android:textSize="20sp"/>
+    <Button
+        android:id="@+id/gomemo"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="메모보기"/>
 </LinearLayout>

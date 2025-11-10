@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/background"
+    android:id="@+id/fragment_memo"
+    android:gravity="center">
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:gravity="center"
+
+
+        >
+        <android.widget.Button
+            android:layout_width="200dp"
+            android:layout_height="57dp"
+            android:id="@+id/memo_write"
+            android:text="@string/memo_write"
+            android:textColor="@color/background"
+            android:textSize="16sp"
+            android:background="@drawable/round_button"/>
+
+        <android.widget.Button
+            android:layout_width="200dp"
+            android:layout_height="57dp"
+            android:layout_marginTop="45dp"
+            android:id="@+id/memo_read"
+            android:text="@string/memo_read"
+            android:textSize="16sp"
+            android:background="@drawable/round_button_light"
+            android:textColor="@color/deepgreen"
+          />
+
+        <android.widget.Button
+            android:layout_width="200dp"
+            android:layout_height="57dp"
+            android:layout_marginTop="45dp"
+            android:id="@+id/memo_my" android:textSize="16sp"
+
+            android:textColor="@color/background"
+            android:text="@string/memo_my"
+            android:background="@drawable/round_button"/>
+
+    </LinearLayout>
+</LinearLayout>
