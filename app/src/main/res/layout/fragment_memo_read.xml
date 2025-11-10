@@ -57,6 +57,10 @@
         android:layout_marginTop="12dp"
         android:progress="1"
         android:max="140"
-         android:thumb="@null"       android:progressDrawable="@drawable/bg_page_progress" />
+         android:thumb="@null"
+        android:clipOrientation="horizontal"
+        android:gravity="left"
+
+        android:progressDrawable="@drawable/bg_page_progress" />
 
 </LinearLayout>
