@@ -2,4 +2,8 @@
     <string name="app_name">OneDayOnePaper</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="memo_write">메모 작성하기</string>
+    <string name="memo_read">메모 읽기</string>
+    <string name="memo_my">내 메모 모아보기</string>
+
 </resources>

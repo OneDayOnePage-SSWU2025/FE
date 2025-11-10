@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:gravity="center_horizontal">
+
+    <include layout="@layout/fragment_memo_topnav" />
+
+
+    <ImageView
+        android:layout_width="60dp"
+        android:layout_height="60dp"
+        android:translationZ="1dp"
+        android:layout_marginTop="30dp"
+        android:id="@+id/profilePreview"
+        android:scaleType="centerCrop"
+        android:background="@color/deepgreen"
+        />
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="-30dp"
+        android:background="@drawable/bg_memo_round"
+        android:gravity="center"
+        android:orientation="vertical">
+        <TextView
+            android:layout_width="280dp"
+            android:layout_height="300dp"
+            android:background="@android:color/transparent"
+            android:layout_weight="1"
+            android:layout_margin="40dp"
+            android:text="빵 맛있겠다. 왜냐하면 맛있어보이기 때문이다."
+            android:fontFamily="@font/scoredream3"
+            />
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="30dp"
+            android:textAlignment="textEnd"
+            android:layout_margin="10dp"
+            android:text="130p"
+            />
+    </LinearLayout>
+    <android.widget.Button
+        android:layout_width="wrap_content"
+        android:layout_marginTop="50dp"
+        android:layout_height="wrap_content"
+        android:background="@drawable/btn_delete_memo"
+        />
+
+
+
+
+</LinearLayout>
