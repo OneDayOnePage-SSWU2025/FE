@@ -7,6 +7,7 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     android:gravity="center"
+    android:background="@color/background"
     tools:context=".MainActivity">
 
     <ImageView
@@ -21,7 +22,7 @@
         android:layout_height="64dp"
         android:layout_marginTop="150dp"
         android:textSize="20dp"
-        android:backgroundTint="#57855E"
+        android:backgroundTint="@color/deepgreen"
         android:text="login"/>
 
     <LinearLayout
