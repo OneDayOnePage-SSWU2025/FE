@@ -1,10 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools">
+    <uses-permission android:name="android.permission.INTERNET" />
 
     <uses-permission android:name="android.permission.INTERNET" />
 
     <application
+        android:usesCleartextTraffic="true"
         android:allowBackup="true"
         android:dataExtractionRules="@xml/data_extraction_rules"
         android:fullBackupContent="@xml/backup_rules"
@@ -13,6 +15,36 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.OneDayOnePaper">
+
+        <activity
+            android:name=".LauncherActivity"
+            android:exported="true">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+            <!-- (선택) Android 12 SplashScreen API 쓰면 여기서 스플래시 테마 지정 -->
+            <!-- android:theme="@style/Theme.App.Splash" -->
+        </activity>
+
+        <activity
+            android:name=".OnboardingActivity"
+            android:exported="false" />
+        <activity
+            android:name=".MakeGroupActivity"
+            android:exported="true" />
+        <activity
+            android:name=".MainSelectActivity"
+            android:exported="true" />
+        <activity
+            android:name=".GroupSelectedActivity"
+            android:exported="true" />
+        <activity
+            android:name=".GroupSelected2Activity"
+            android:exported="true" />
+        <activity
+            android:name=".JoinGroupActivity"
+            android:exported="true" />
         <activity
             android:name=".SignupActivity"
             android:exported="false" />

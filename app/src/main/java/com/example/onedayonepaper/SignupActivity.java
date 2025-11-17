@@ -29,7 +29,7 @@ public class SignupActivity extends AppCompatActivity {
     private Button checkBtn;
 
     private EditText etId, etPwd, etNic;
-    private ImageButton addProfileBtn;
+    private ImageButton addProfileBtn, backBtn;
     private ImageView profilePreview;
 
     private Uri selectedProfileUri = null;
@@ -68,6 +68,10 @@ public class SignupActivity extends AppCompatActivity {
         etNic = findViewById(R.id.inputNic);
         addProfileBtn = findViewById(R.id.addProfileBtn);
         profilePreview = findViewById(R.id.profilePreview);
+        backBtn = findViewById(R.id.backBtn);
+
+        flipper.setInAnimation(this, android.R.anim.slide_in_left);
+        flipper.setOutAnimation(this, android.R.anim.slide_out_right);
 
         // 초기 상태
         setStep(0);
@@ -134,6 +138,15 @@ public class SignupActivity extends AppCompatActivity {
                 } else {
                     // TODO: 프로필 선택 유도 메시지
                 }
+            }
+        });
+
+        backBtn.setOnClickListener(view -> {
+            if (flipper.getDisplayedChild() > 0) { // 첫 화면이 아닐 때만 뒤로
+                flipper.showPrevious();
+                updateProgress(flipper.getDisplayedChild());
+            } else {
+                finish();
             }
         });
     }

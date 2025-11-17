@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:gravity="center_horizontal">
+
+    <include layout="@layout/fragment_memo_topnav" />
+
+    <Spinner
+        android:id="@+id/pageSpinner"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@drawable/bg_spinner_round"
+        android:paddingHorizontal="16dp"
+        android:spinnerMode="dropdown"
+        android:popupBackground="@android:color/transparent" />
+    <ImageView
+        android:layout_width="60dp"
+        android:layout_height="60dp"
+        android:translationZ="1dp"
+        android:layout_marginTop="30dp"
+        android:id="@+id/profilePreview"
+        android:scaleType="centerCrop"
+        android:background="@color/deepgreen"
+        />
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="-30dp"
+        android:background="@drawable/bg_memo_round"
+        android:gravity="center">
+        <EditText
+            android:layout_width="280dp"
+            android:layout_height="300dp"
+            android:background="@android:color/transparent"
+
+            />
+    </LinearLayout>
+    <android.widget.Button
+        android:layout_width="328dp"
+        android:layout_marginTop="10dp"
+        android:layout_height="60dp"
+        android:background="@drawable/btn_check_off"
+       />
+
+
+
+
+</LinearLayout>
