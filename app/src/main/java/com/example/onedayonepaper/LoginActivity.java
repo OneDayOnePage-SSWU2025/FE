@@ -1,5 +1,6 @@
 package com.example.onedayonepaper;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
@@ -7,6 +8,7 @@ import android.view.View;
 import android.view.inputmethod.EditorInfo;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Toast;
 
 import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
@@ -14,13 +16,21 @@ import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 
-public class LoginActivity extends AppCompatActivity {
+import com.example.onedayonepaper.data.ApiClient;
 
+import retrofit2.Call;
+import retrofit2.http.Body;
+import retrofit2.http.POST;
+
+public class LoginActivity extends AppCompatActivity {
     EditText inputId, inputPwd;
     Button checkBtn;
+    AuthApi authApi;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        authApi = ApiClient.getClient(this).create(AuthApi.class);
+
         super.onCreate(savedInstanceState);
         EdgeToEdge.enable(this);
         setContentView(R.layout.activity_login);
@@ -60,7 +70,42 @@ public class LoginActivity extends AppCompatActivity {
         checkBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                //TODO: 로그인 정보 확인 후 뷰 체인지
+                String id  = inputId.getText().toString().trim();
+                String pwd = inputPwd.getText().toString().trim();
+
+                LoginRequest req = new LoginRequest(id, pwd);
+
+                Call<ApiResponse> call = authApi.login(req);
+                call.enqueue(new retrofit2.Callback<ApiResponse>() {
+                    @Override
+                    public void onResponse(Call<ApiResponse> call,
+                                           retrofit2.Response<ApiResponse> response) {
+                        if (response.isSuccessful() && response.body() != null) {
+                            ApiResponse body = response.body();
+                            if (body.isSuccess()) {
+                                String token = body.getData();   // jwt 토큰
+
+                                //SharedPreferences 저장
+                                getSharedPreferences("auth", MODE_PRIVATE)
+                                        .edit()
+                                        .putString("jwt", token)
+                                        .apply();
+
+                                startActivity(new Intent(LoginActivity.this, MainActivity.class));
+                            } else {
+                                // todo: 로그인 실패 (비밀번호 틀림 등)
+                            }
+                        } else {
+                            // todo: 서버 에러, 응답 실패
+                        }
+                    }
+
+                    @Override
+                    public void onFailure(Call<ApiResponse> call, Throwable t) {
+                        // 네트워크 에러
+                        Toast.makeText(LoginActivity.this, "서버 연결 실패", Toast.LENGTH_SHORT).show();
+                    }
+                });
             }
         });
     }
@@ -84,5 +129,31 @@ public class LoginActivity extends AppCompatActivity {
             @Override public void onTextChanged(CharSequence s, int start, int before, int count) {}
             @Override public void afterTextChanged(Editable s) { if (after != null) after.run(); }
         };
+    }
+
+    //백엔드 연결
+    public static class LoginRequest {
+        String id;
+        String password;
+
+        public LoginRequest(String id, String password) {
+            this.id = id;
+            this.password = password;
+        }
+    }
+
+    public static class ApiResponse {
+        boolean success;
+        String message;
+        String data; // 토큰 저장
+
+        public boolean isSuccess() { return success; }
+        public String getMessage() { return message; }
+        public String getData() { return data; }
+    }
+
+    public interface AuthApi {
+        @POST("/login")
+        Call<ApiResponse> login(@Body LoginRequest request);
     }
 }
