@@ -16,20 +16,21 @@ import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 
-import com.example.onedayonepaper.data.ApiClient;
+import com.example.onedayonepaper.data.api.ApiClient;
+import com.example.onedayonepaper.data.api.ApiService;
+import com.example.onedayonepaper.data.dto.LoginRequest;
+import com.example.onedayonepaper.data.dto.LoginResponse;
 
 import retrofit2.Call;
-import retrofit2.http.Body;
-import retrofit2.http.POST;
 
 public class LoginActivity extends AppCompatActivity {
     EditText inputId, inputPwd;
     Button checkBtn;
-    AuthApi authApi;
+    ApiService authApi;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        authApi = ApiClient.getClient(this).create(AuthApi.class);
+        authApi = ApiClient.getClient(this).create(ApiService.class);
 
         super.onCreate(savedInstanceState);
         EdgeToEdge.enable(this);
@@ -75,15 +76,15 @@ public class LoginActivity extends AppCompatActivity {
 
                 LoginRequest req = new LoginRequest(id, pwd);
 
-                Call<ApiResponse> call = authApi.login(req);
-                call.enqueue(new retrofit2.Callback<ApiResponse>() {
+                Call<LoginResponse> call = authApi.login(req);
+                call.enqueue(new retrofit2.Callback<LoginResponse>() {
                     @Override
-                    public void onResponse(Call<ApiResponse> call,
-                                           retrofit2.Response<ApiResponse> response) {
+                    public void onResponse(Call<LoginResponse> call,
+                                           retrofit2.Response<LoginResponse> response) {
                         if (response.isSuccessful() && response.body() != null) {
-                            ApiResponse body = response.body();
+                            LoginResponse body = response.body();
                             if (body.isSuccess()) {
-                                String token = body.getData();   // jwt 토큰
+                                String token = body.getData().toString();   // jwt 토큰
 
                                 //SharedPreferences 저장
                                 getSharedPreferences("auth", MODE_PRIVATE)
@@ -93,15 +94,19 @@ public class LoginActivity extends AppCompatActivity {
 
                                 startActivity(new Intent(LoginActivity.this, MainActivity.class));
                             } else {
-                                // todo: 로그인 실패 (비밀번호 틀림 등)
+                                Toast.makeText(LoginActivity.this,
+                                        "아이디 또는 비밀번호가 틀렸습니다",
+                                        Toast.LENGTH_SHORT).show();
                             }
                         } else {
-                            // todo: 서버 에러, 응답 실패
+                            Toast.makeText(LoginActivity.this,
+                                    "로그인 실패: " + response.code(),
+                                    Toast.LENGTH_SHORT).show();
                         }
                     }
 
                     @Override
-                    public void onFailure(Call<ApiResponse> call, Throwable t) {
+                    public void onFailure(Call<LoginResponse> call, Throwable t) {
                         // 네트워크 에러
                         Toast.makeText(LoginActivity.this, "서버 연결 실패", Toast.LENGTH_SHORT).show();
                     }
@@ -114,8 +119,8 @@ public class LoginActivity extends AppCompatActivity {
         String id  = inputId.getText().toString().trim();
         String pwd = inputPwd.getText().toString().trim();
 
-        boolean idOk  = id.length() >= 5;
-        boolean pwdOk = pwd.length() >= 9;
+        boolean idOk  = id.length() >= 3;
+        boolean pwdOk = pwd.length() >= 3;
 
         inputId.setActivated(idOk);
         inputPwd.setActivated(pwdOk);
@@ -131,29 +136,4 @@ public class LoginActivity extends AppCompatActivity {
         };
     }
 
-    //백엔드 연결
-    public static class LoginRequest {
-        String id;
-        String password;
-
-        public LoginRequest(String id, String password) {
-            this.id = id;
-            this.password = password;
-        }
-    }
-
-    public static class ApiResponse {
-        boolean success;
-        String message;
-        String data; // 토큰 저장
-
-        public boolean isSuccess() { return success; }
-        public String getMessage() { return message; }
-        public String getData() { return data; }
-    }
-
-    public interface AuthApi {
-        @POST("/login")
-        Call<ApiResponse> login(@Body LoginRequest request);
-    }
 }

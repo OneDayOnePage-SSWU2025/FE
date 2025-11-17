@@ -17,7 +17,7 @@
         android:theme="@style/Theme.OneDayOnePaper">
 
         <activity
-            android:name=".LauncherActivity"
+            android:name=".MainPageActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
