@@ -1,0 +1,79 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:gravity="center_horizontal">
+
+    <com.google.android.material.card.MaterialCardView
+        android:layout_width="match_parent"
+        android:layout_height="156dp"
+        app:cardCornerRadius="10dp"
+        app:cardUseCompatPadding="true"
+        android:layout_marginHorizontal="20dp"
+        app:cardElevation="4dp">
+
+        <FrameLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@drawable/bg_stat_gradient_null"
+            android:padding="20dp">
+
+            <TextView
+                android:id="@+id/tvClub"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="아직 독서 그룹이 없네요..."
+                android:textColor="@color/white"
+                android:textStyle="bold"
+                android:textSize="16sp"/>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="독서 그룹을 만들고 나의 펫을 찾아보아요!"
+                android:textColor="@color/white"
+                android:layout_marginTop="30dp"
+                android:fontFamily="@font/scoredream3"
+                android:textSize="13sp"/>
+
+            <TextView
+                android:id="@+id/tvRank"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="상위 0%"
+                android:textColor="@color/white"
+                android:textStyle="bold"
+                android:textSize="28sp"
+                android:layout_gravity="end|bottom"/>
+        </FrameLayout>
+    </com.google.android.material.card.MaterialCardView>
+
+
+    <com.google.android.material.card.MaterialCardView
+        android:layout_width="351dp"
+        android:layout_height="324dp"
+        android:layout_marginTop="50dp"
+        android:layout_gravity="center_horizontal"
+        app:cardCornerRadius="40dp">
+
+        <ImageView
+            android:id="@+id/ivBackground"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:scaleType="centerCrop"
+            android:src="@drawable/room_bg_null" />
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:src="@drawable/null_egg" />
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:src="@drawable/question" />
+
+    </com.google.android.material.card.MaterialCardView>
+</LinearLayout>
