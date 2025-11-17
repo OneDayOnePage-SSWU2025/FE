@@ -9,18 +9,17 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.onedayonepaper.data.dto.HomeGroupItem;
+import com.example.onedayonepaper.data.mapper.PetImageMapper;
+
 import java.util.List;
 
 public class HomePagerAdapter extends RecyclerView.Adapter<HomePagerAdapter.ViewHolder> {
 
-    private final List<Integer> characterList;
-    private final List<String> clubNames;
-    private final List<String> ranks;
+    private List<HomeGroupItem> items;
 
-    public HomePagerAdapter(List<Integer> characterList, List<String> clubNames, List<String> ranks) {
-        this.characterList = characterList;
-        this.clubNames = clubNames;
-        this.ranks = ranks;
+    public HomePagerAdapter(List<HomeGroupItem> items) {
+        this.items = items;
     }
 
     public static class ViewHolder extends RecyclerView.ViewHolder {
@@ -46,14 +45,18 @@ public class HomePagerAdapter extends RecyclerView.Adapter<HomePagerAdapter.View
 
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
-        holder.ivCharacter.setImageResource(characterList.get(position));
+        HomeGroupItem item = items.get(position);
+
+        holder.ivCharacter.setImageResource(PetImageMapper.getCharacterImage(item.getPetType(), item.getTotalBook()));
         holder.ivBackground.setImageResource(R.drawable.bg_room);
-        holder.tvClub.setText(clubNames.get(position));
-        holder.tvRank.setText(ranks.get(position));
+
+        holder.tvClub.setText(item.getGroupName());
+        holder.tvRank.setText("상위 " + item.getPercentage() + "%");
     }
 
     @Override
     public int getItemCount() {
-        return characterList.size();
+        return items.size();
     }
 }
+
