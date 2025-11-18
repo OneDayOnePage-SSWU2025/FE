@@ -64,11 +64,9 @@ public class HomeFragment extends Fragment {
     }
 
     private void fetchHomeGroups() {
-        ApiService api = ApiClient.getClient().create(ApiService.class);
-        //여기에 로그인해서 나온 토큰 넣어야댐요~~~~~~ 아직 로그인 연동이 안돼서 이렇게 임시로 해둠
-        String tmpToken = "Bearer ";
+        ApiService api = ApiClient.getClient(requireContext()).create(ApiService.class);
 
-        api.getHomeGroups(tmpToken).enqueue(new Callback<HomeResponse>() {
+        api.getHomeGroups().enqueue(new Callback<HomeResponse>() {
             @Override
             public void onResponse(Call<HomeResponse> call, Response<HomeResponse> response) {
 

@@ -1,6 +1,7 @@
 plugins {
     alias(libs.plugins.android.application)
 }
+
 android {
     namespace = "com.example.onedayonepaper"
     compileSdk = 36
