@@ -5,6 +5,7 @@ import com.example.onedayonepaper.data.dto.HomeResponse;
 import com.example.onedayonepaper.data.dto.LoginRequest;
 import com.example.onedayonepaper.data.dto.LoginResponse;
 import com.example.onedayonepaper.data.dto.ReportResponse;
+import com.example.onedayonepaper.data.dto.UserInfoResponse;
 
 import retrofit2.Call;
 import retrofit2.http.Body;
@@ -17,7 +18,9 @@ public interface ApiService {
     Call<HomeResponse> getHomeGroups();
     @POST("/users/login")
     Call<LoginResponse> login(@Body LoginRequest request);
-
     @GET("/users/report")
     Call<ReportResponse> getReport();
+    @GET("/users/my")
+    Call<UserInfoResponse> getMyInfo();
+
 }
