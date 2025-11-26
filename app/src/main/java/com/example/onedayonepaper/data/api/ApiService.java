@@ -4,11 +4,13 @@ import com.example.onedayonepaper.data.dto.HomeResponse;
 import com.example.onedayonepaper.data.dto.LoginRequest;
 import com.example.onedayonepaper.data.dto.LoginResponse;
 import com.example.onedayonepaper.data.dto.ReportResponse;
+import com.example.onedayonepaper.data.dto.SignUpResponse;
 import com.example.onedayonepaper.data.dto.UpdateNicknameRequest;
 import com.example.onedayonepaper.data.dto.UserInfoResponse;
 import com.example.onedayonepaper.data.dto.UserUpdateResponse;
 
 import okhttp3.MultipartBody;
+import okhttp3.RequestBody;
 import retrofit2.Call;
 import retrofit2.http.Body;
 import retrofit2.http.GET;
@@ -33,6 +35,15 @@ public interface ApiService {
     );
     @PATCH("/users/nickname")
     Call<UserUpdateResponse> updateNickname(@Body UpdateNicknameRequest request);
+
+    @Multipart
+    @POST("/users/signup")
+    Call<SignUpResponse> signup(
+            @Part("id") RequestBody id,
+            @Part("password") RequestBody password,
+            @Part("nickName") RequestBody nickName,
+            @Part MultipartBody.Part img
+    );
 
 
 }
