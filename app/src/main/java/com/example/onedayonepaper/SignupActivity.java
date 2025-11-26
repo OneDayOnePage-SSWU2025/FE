@@ -1,13 +1,17 @@
 package com.example.onedayonepaper;
 
+import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
+import android.view.inputmethod.EditorInfo;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
+import android.widget.Toast;
 import android.widget.ViewFlipper;
 
 import androidx.activity.EdgeToEdge;
@@ -20,7 +24,19 @@ import androidx.core.view.WindowInsetsCompat;
 
 import android.text.Editable;
 import android.text.TextWatcher;
-import android.view.inputmethod.EditorInfo;
+
+import com.example.onedayonepaper.data.api.ApiClient;
+import com.example.onedayonepaper.data.api.ApiService;
+import com.example.onedayonepaper.data.dto.SignUpResponse;
+
+import java.io.ByteArrayOutputStream;
+import java.io.IOException;
+import java.io.InputStream;
+
+import okhttp3.MediaType;
+import okhttp3.MultipartBody;
+import okhttp3.RequestBody;
+import retrofit2.Call;
 
 public class SignupActivity extends AppCompatActivity {
 
@@ -35,6 +51,8 @@ public class SignupActivity extends AppCompatActivity {
     private Uri selectedProfileUri = null;
 
     private final int TOTAL_STEPS = 4; // 0:id,1:pwd,2:nic,3:profile
+
+    private ApiService authApi;
 
     // 갤러리 런처
     private final ActivityResultLauncher<String> pickImage =
@@ -73,7 +91,7 @@ public class SignupActivity extends AppCompatActivity {
         flipper.setInAnimation(this, android.R.anim.slide_in_left);
         flipper.setOutAnimation(this, android.R.anim.slide_out_right);
 
-        // 초기 상태
+        //초기 상태
         setStep(0);
 
         etId.addTextChangedListener(simpleWatcher(this::updateButtonEnabled));
@@ -116,7 +134,6 @@ public class SignupActivity extends AppCompatActivity {
             return false;
         });
 
-
         // 프로필 선택
         addProfileBtn.setOnClickListener(v -> pickImage.launch("image/*"));
 
@@ -124,20 +141,77 @@ public class SignupActivity extends AppCompatActivity {
         checkBtn.setOnClickListener(v -> {
             int step = getStep();
             if (step == 0) {
-                if (isValidId(etId.getText().toString().trim())) goNext();
-                else etId.setError("아이디는 5글자 이상");
-            } else if (step == 1) {
-                if (isValidPwd(etPwd.getText().toString())) goNext();
-                else etPwd.setError("비밀번호는 9글자 이상");
-            } else if (step == 2) {
-                if (isValidNic(etNic.getText().toString().trim())) goNext();
-                else etNic.setError("닉네임은 2글자 이상");
-            } else if (step == 3) {
-                if (isProfileSelected()) {
-                    // TODO: 회원가입 완료 처리
+                if (isValidId(etId.getText().toString().trim())) {
+                    goNext();
                 } else {
-                    // TODO: 프로필 선택 유도 메시지
+                    etId.setError("아이디는 5글자 이상");
                 }
+            } else if (step == 1) {
+                if (isValidPwd(etPwd.getText().toString())) {
+                    goNext();
+                } else {
+                    etPwd.setError("비밀번호는 5글자 이상");
+                }
+            } else if (step == 2) {
+                if (isValidNic(etNic.getText().toString().trim())) {
+                    goNext();
+                } else {
+                    etNic.setError("닉네임은 2글자 이상");
+                }
+            } else if (step == 3) {
+                if (!isProfileSelected()) {
+                    Toast.makeText(getApplicationContext(), "프로필 사진을 선택해주세요.", Toast.LENGTH_SHORT).show();
+                    return;
+                }
+
+                authApi = ApiClient.getClient(this).create(ApiService.class);
+
+                String id = etId.getText().toString().trim();
+                String pwd = etPwd.getText().toString();
+                String nick = etNic.getText().toString().trim();
+
+                RequestBody idBody = RequestBody.create(id, MediaType.parse("text/plain"));
+                RequestBody pwdBody = RequestBody.create(pwd, MediaType.parse("text/plain"));
+                RequestBody nickBody = RequestBody.create(nick, MediaType.parse("text/plain"));
+
+                MultipartBody.Part imgPart = createImagePartFromUri(selectedProfileUri);
+                if (imgPart == null) {
+                    return;
+                }
+
+                Call<SignUpResponse> call = authApi.signup(idBody, pwdBody, nickBody, imgPart);
+                call.enqueue(new retrofit2.Callback<SignUpResponse>() {
+                    @Override
+                    public void onResponse(Call<SignUpResponse> call,
+                                           retrofit2.Response<SignUpResponse> response) {
+                        if (response.isSuccessful() && response.body() != null) {
+                            SignUpResponse body = response.body();
+                            if (body.isSuccess()) {
+                                startActivity(new Intent(SignupActivity.this, MainActivity.class));
+                            } else {
+                                Toast.makeText(getApplicationContext(),
+                                        "회원가입 실패: " + body.getMessage(),
+                                        Toast.LENGTH_SHORT).show();
+                            }
+                        } else {
+                            Toast.makeText(SignupActivity.this,
+                                    "회원가입 실패(http): " + response.code(),
+                                    Toast.LENGTH_SHORT).show();
+                            String errorBody = response.errorBody() != null
+                                    ? response.errorBody().toString()
+                                    : "no error body";
+
+                            Log.e("SIGNUP", "error = " + errorBody);
+                        }
+                    }
+
+                    @Override
+                    public void onFailure(Call<SignUpResponse> call, Throwable t) {
+                        Toast.makeText(SignupActivity.this,
+                                "네트워크 오류: " + t.getMessage(),
+                                Toast.LENGTH_SHORT).show();
+                    }
+                });
             }
         });
 
@@ -166,11 +240,8 @@ public class SignupActivity extends AppCompatActivity {
     private void setStep(int step) {
         flipper.setDisplayedChild(step);
         updateProgress(step);
-        // 새 단계 진입 시 버튼 비활성화
         checkBtn.setEnabled(false);
-        // 현재 값이 유효하면 활성화
         updateButtonEnabled();
-        // 포커스 이동
         requestFocusForStep(step);
     }
 
@@ -188,7 +259,6 @@ public class SignupActivity extends AppCompatActivity {
         if (step == 0) etId.requestFocus();
         else if (step == 1) etPwd.requestFocus();
         else if (step == 2) etNic.requestFocus();
-        // 이미지 버튼
     }
 
     private void updateButtonEnabled() {
@@ -212,9 +282,37 @@ public class SignupActivity extends AppCompatActivity {
         if (imm != null) imm.hideSoftInputFromWindow(v.getWindowToken(), 0);
     }
 
-    //검증 규칡
+    // 검증 규칙
     private boolean isValidId(String s) { return s != null && s.length() > 4; }
-    private boolean isValidPwd(String s) { return s != null && s.length() > 8; }
+    private boolean isValidPwd(String s) { return s != null && s.length() > 5; }
     private boolean isValidNic(String s) { return s != null && s.length() > 2; }
     private boolean isProfileSelected() { return selectedProfileUri != null; }
+
+    private MultipartBody.Part createImagePartFromUri(Uri uri) {
+        if (uri == null) return null;
+
+        try (InputStream is = getContentResolver().openInputStream(uri);
+             ByteArrayOutputStream baos = new ByteArrayOutputStream()) {
+
+            byte[] buffer = new byte[8192];
+            int len;
+            while ((len = is.read(buffer)) != -1) {
+                baos.write(buffer, 0, len);
+            }
+
+            byte[] bytes = baos.toByteArray();
+            RequestBody requestBody =
+                    RequestBody.create(bytes, MediaType.parse("image/*"));
+
+            String fileName = "profile_" + System.currentTimeMillis() + ".jpg";
+            return MultipartBody.Part.createFormData(
+                    "img",
+                    fileName,
+                    requestBody
+            );
+        } catch (IOException e) {
+            e.printStackTrace();
+            return null;
+        }
+    }
 }

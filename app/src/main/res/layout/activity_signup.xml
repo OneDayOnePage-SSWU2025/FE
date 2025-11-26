@@ -89,7 +89,7 @@
                 android:layout_marginTop="20dp"
                 android:background="@drawable/et_bg_round"
                 android:backgroundTint="@color/et_tint_selector"
-                android:hint="8글자 이상"
+                android:hint="5글자 이상"
                 android:imeOptions="actionDone"
                 android:paddingHorizontal="16dp"
                 android:singleLine="true" />
