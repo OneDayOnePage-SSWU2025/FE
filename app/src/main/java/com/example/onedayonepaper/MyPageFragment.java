@@ -10,6 +10,7 @@ import android.text.style.StyleSpan;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -17,14 +18,19 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
+import com.bumptech.glide.Glide;
 import com.example.onedayonepaper.data.api.ApiClient;
 import com.example.onedayonepaper.data.api.ApiService;
 import com.example.onedayonepaper.data.dto.ReportItem;
 import com.example.onedayonepaper.data.dto.ReportResponse;
+import com.example.onedayonepaper.data.dto.UserInfo;
+import com.example.onedayonepaper.data.dto.UserInfoResponse;
 
 import java.util.Locale;
 
 import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 public class MyPageFragment extends Fragment {
 
@@ -42,6 +48,42 @@ public class MyPageFragment extends Fragment {
         TextView memoCountTxt = v.findViewById(R.id.memoCountTxt);
 
         apiService = ApiClient.getClient(requireContext()).create(ApiService.class);
+
+        apiService.getMyInfo().enqueue(new Callback<UserInfoResponse>() {
+            @Override
+            public void onResponse(Call<UserInfoResponse> call,
+                                   Response<UserInfoResponse> response) {
+
+                if (response.isSuccessful() && response.body() != null) {
+                    UserInfoResponse body = response.body();
+
+                    if (body.isSuccess()) {
+
+                        UserInfo info = body.getData();
+
+                        String nickname = info.getNickName();
+                        String imgUrl = info.getImgUrl();
+
+                        TextView nicknameTxt = v.findViewById(R.id.nickName);
+                        nicknameTxt.setText(nickname);
+
+                        ImageView profileImg = v.findViewById(R.id.profileImg);
+                        Glide.with(requireContext())
+                                .load(imgUrl)
+                                .into(profileImg);
+
+                    }
+                }
+            }
+
+            @Override
+            public void onFailure(Call<UserInfoResponse> call, Throwable t) {
+                Toast.makeText(requireContext(),
+                        "서버 연결 실패: " + t.getMessage(),
+                        Toast.LENGTH_SHORT).show();
+            }
+        });
+
 
         apiService.getReport().enqueue(new retrofit2.Callback<ReportResponse>() {
             @Override

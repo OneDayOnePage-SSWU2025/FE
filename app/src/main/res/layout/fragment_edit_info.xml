@@ -38,7 +38,7 @@
         android:layout_marginBottom="5dp">
 
         <com.google.android.material.imageview.ShapeableImageView
-            android:id="@+id/profilePreview"
+            android:id="@+id/profileImg"
             android:layout_width="145dp"
             android:layout_height="145dp"
             android:scaleType="centerCrop"
@@ -49,8 +49,8 @@
             android:id="@+id/profileEditBtn"
             android:layout_width="36dp"
             android:layout_height="36dp"
-            android:layout_alignBottom="@id/profilePreview"
-            android:layout_alignEnd="@id/profilePreview"
+            android:layout_alignBottom="@id/profileImg"
+            android:layout_alignEnd="@id/profileImg"
             android:layout_marginEnd="4dp"
             android:layout_marginBottom="4dp"
             android:background="@android:color/transparent"
@@ -72,7 +72,7 @@
             android:textSize="20dp"/>
         
         <EditText
-            android:id="@+id/inputNic"
+            android:id="@+id/inputNick"
             android:layout_width="170dp"
             android:layout_height="30dp"
             android:layout_marginLeft="10dp"
