@@ -19,6 +19,7 @@ import retrofit2.http.Multipart;
 import retrofit2.http.PATCH;
 import retrofit2.http.POST;
 import retrofit2.http.Part;
+import retrofit2.http.Query;
 
 public interface ApiService {
     @GET("/groups")
@@ -48,4 +49,11 @@ public interface ApiService {
 
     @GET("/groups/detail")
     Call<GroupsResponse> getGroupDetail();
+
+    @POST("/groups/join")
+    Call<Void> joinGroup(
+            @Query("groupName") String groupName,
+            @Query("code") int code
+    );
+
 }
