@@ -204,7 +204,7 @@ public class MakeGroupFragment extends Fragment {
 
     private void searchBooksFromAladin(String query) {
 
-        String TTB_KEY = "ttbquffl20021619001";
+        String TTB_KEY = "//TODO";
 
         AladinApiService api = AladinApiClient.getClient().create(AladinApiService.class);
 
@@ -258,7 +258,7 @@ public class MakeGroupFragment extends Fragment {
 
     private void searchBookInfoFromAladin(String isbn13) {
 
-        String TTB_KEY = "ttbquffl20021619001";
+        String TTB_KEY = "//TODO";
 
         AladinApiService api = AladinApiClient.getClient().create(AladinApiService.class);
 
