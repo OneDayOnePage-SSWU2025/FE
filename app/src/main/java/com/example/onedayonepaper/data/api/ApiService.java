@@ -8,6 +8,7 @@ import com.example.onedayonepaper.data.dto.SignUpResponse;
 import com.example.onedayonepaper.data.dto.UpdateNicknameRequest;
 import com.example.onedayonepaper.data.dto.UserInfoResponse;
 import com.example.onedayonepaper.data.dto.UserUpdateResponse;
+import com.example.onedayonepaper.data.dto.request.CreateGroupRequest;
 import com.example.onedayonepaper.data.dto.response.GroupsResponse;
 
 import okhttp3.MultipartBody;
@@ -56,4 +57,6 @@ public interface ApiService {
             @Query("code") int code
     );
 
+    @POST("/groups")
+    Call<Void> createGroup(@Body CreateGroupRequest request);
 }
