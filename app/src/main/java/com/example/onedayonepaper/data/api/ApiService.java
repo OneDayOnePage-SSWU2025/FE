@@ -8,6 +8,7 @@ import com.example.onedayonepaper.data.dto.SignUpResponse;
 import com.example.onedayonepaper.data.dto.UpdateNicknameRequest;
 import com.example.onedayonepaper.data.dto.UserInfoResponse;
 import com.example.onedayonepaper.data.dto.UserUpdateResponse;
+import com.example.onedayonepaper.data.dto.response.GroupsResponse;
 
 import okhttp3.MultipartBody;
 import okhttp3.RequestBody;
@@ -45,5 +46,6 @@ public interface ApiService {
             @Part MultipartBody.Part img
     );
 
-
+    @GET("/groups/detail")
+    Call<GroupsResponse> getGroupDetail();
 }
