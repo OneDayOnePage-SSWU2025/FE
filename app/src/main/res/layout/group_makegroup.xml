@@ -192,7 +192,7 @@
         android:layout_width="204dp"
         android:layout_height="57dp"
         android:layout_gravity="center_horizontal"
-        android:layout_marginTop="326dp"
+        android:layout_marginTop="250dp"
         android:layout_marginBottom="16dp"
         android:background="@drawable/btn_deepgreen_rounded"
         android:text="생성하기"
