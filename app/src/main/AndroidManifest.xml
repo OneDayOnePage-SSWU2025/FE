@@ -31,19 +31,7 @@
             android:name=".OnboardingActivity"
             android:exported="false" />
         <activity
-            android:name=".MakeGroupActivity"
-            android:exported="true" />
-        <activity
-            android:name=".MainSelectActivity"
-            android:exported="true" />
-        <activity
             android:name=".GroupSelectedActivity"
-            android:exported="true" />
-        <activity
-            android:name=".GroupSelected2Activity"
-            android:exported="true" />
-        <activity
-            android:name=".JoinGroupActivity"
             android:exported="true" />
         <activity
             android:name=".SignupActivity"
