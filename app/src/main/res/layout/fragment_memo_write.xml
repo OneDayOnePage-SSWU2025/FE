@@ -15,8 +15,8 @@
         android:spinnerMode="dropdown"
         android:popupBackground="@drawable/bg_spinner_popup"
         android:layout_marginTop="16dp"
+        android:layout_gravity="center_horizontal"
         android:dropDownVerticalOffset="120dp"
-        android:dropDownHorizontalOffset="0dp"
         android:dropDownHeight="140dp"
         />
 

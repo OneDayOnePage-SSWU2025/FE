@@ -12,6 +12,7 @@ import com.example.onedayonepaper.data.dto.request.CreateGroupRequest;
 import com.example.onedayonepaper.data.dto.request.MemoRequest;
 import com.example.onedayonepaper.data.dto.response.BookTotalPageResponse;
 import com.example.onedayonepaper.data.dto.response.GroupsResponse;
+import com.example.onedayonepaper.data.dto.response.MemoListResponse;
 
 import okhttp3.MultipartBody;
 import okhttp3.RequestBody;
@@ -66,5 +67,12 @@ public interface ApiService {
     Call<BookTotalPageResponse> getTotalPage(@Query("bookId") int bookId);
     @POST("/books/memo")
     Call<Void> postMemo(@Body MemoRequest request);
+
+    @GET("/books/memo_by_page")
+    Call<MemoListResponse> getMemoByPage(
+            @Query("bookId") int bookId,
+            @Query("page") int page
+    );
+
 
 }

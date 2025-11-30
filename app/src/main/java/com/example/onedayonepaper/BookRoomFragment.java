@@ -73,12 +73,14 @@ public class BookRoomFragment extends Fragment {
 
             int bookId = item.getBook().getBookId();
             String bookTitle = item.getBook().getBookTitle();
+            String bookAuthor = item.getBook().getAuthor();
 
             Fragment memoFragment = new MemoFragment();
 
             Bundle bundle = new Bundle();
             bundle.putInt("bookId", bookId);
             bundle.putString("bookTitle", bookTitle);
+            bundle.putString("bookAuthor", bookAuthor);
 
             memoFragment.setArguments(bundle);
 
