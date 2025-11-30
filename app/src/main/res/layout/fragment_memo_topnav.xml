@@ -13,6 +13,7 @@
         android:background="@drawable/ic_allow_left" />
 
     <TextView
+        android:id="@+id/bookTitle"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_weight="1"

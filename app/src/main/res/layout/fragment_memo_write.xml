@@ -7,14 +7,20 @@
 
     <include layout="@layout/fragment_memo_topnav" />
 
-    <Spinner
+    <androidx.appcompat.widget.AppCompatSpinner
         android:id="@+id/pageSpinner"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="300dp"
+        android:layout_height="48dp"
         android:background="@drawable/bg_spinner_round"
-        android:paddingHorizontal="16dp"
         android:spinnerMode="dropdown"
-        android:popupBackground="@android:color/transparent" />
+        android:popupBackground="@drawable/bg_spinner_popup"
+        android:layout_marginTop="16dp"
+        android:dropDownVerticalOffset="120dp"
+        android:dropDownHorizontalOffset="0dp"
+        android:dropDownHeight="140dp"
+        />
+
+
     <ImageView
         android:layout_width="60dp"
         android:layout_height="60dp"
@@ -22,7 +28,7 @@
         android:layout_marginTop="30dp"
         android:id="@+id/profilePreview"
         android:scaleType="centerCrop"
-        android:background="@color/deepgreen"
+        android:background="@drawable/bg_circle_green"
         />
     <LinearLayout
         android:layout_width="wrap_content"
@@ -31,20 +37,18 @@
         android:background="@drawable/bg_memo_round"
         android:gravity="center">
         <EditText
+            android:id="@+id/memoEdit"
             android:layout_width="280dp"
             android:layout_height="300dp"
+            android:hint="책을 읽으며 어떤 생각이 들었나요?"
             android:background="@android:color/transparent"
-
             />
     </LinearLayout>
     <android.widget.Button
+        android:id="@+id/memoSendBtn"
         android:layout_width="328dp"
         android:layout_marginTop="10dp"
         android:layout_height="60dp"
         android:background="@drawable/btn_check_off"
        />
-
-
-
-
 </LinearLayout>

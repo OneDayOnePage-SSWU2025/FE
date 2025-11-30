@@ -24,18 +24,23 @@ public class MemoFragment extends Fragment {
         Button btnRead = view.findViewById(R.id.memo_read);
         Button btnMy = view.findViewById(R.id.memo_my);
 
-
+        // 메모 작성하기 페이지로 이동
         btnWrite.setOnClickListener(v -> {
+
+            Bundle args = getArguments();
+
             Fragment memoWriteFragment = new MemoWriteFragment();
-            FragmentTransaction transaction = requireActivity()
+            memoWriteFragment.setArguments(args);
+
+            requireActivity()
                     .getSupportFragmentManager()
-                    .beginTransaction();
-            transaction.replace(R.id.main_frame, memoWriteFragment);
-            transaction.addToBackStack(null);
-            transaction.commit();
+                    .beginTransaction()
+                    .replace(R.id.main_frame, memoWriteFragment)
+                    .addToBackStack(null)
+                    .commit();
         });
 
-
+        // 메모 모아보기 화면으로 이동
         btnRead.setOnClickListener(v -> {
             Fragment memoReadFragment = new MemoReadFragment();
             FragmentTransaction transaction = requireActivity()
