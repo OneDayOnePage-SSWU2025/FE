@@ -10,19 +10,23 @@ import com.example.onedayonepaper.data.dto.UserInfoResponse;
 import com.example.onedayonepaper.data.dto.UserUpdateResponse;
 import com.example.onedayonepaper.data.dto.request.CreateGroupRequest;
 import com.example.onedayonepaper.data.dto.request.MemoRequest;
+import com.example.onedayonepaper.data.dto.response.BasicResponse;
 import com.example.onedayonepaper.data.dto.response.BookTotalPageResponse;
 import com.example.onedayonepaper.data.dto.response.GroupsResponse;
 import com.example.onedayonepaper.data.dto.response.MemoListResponse;
+import com.example.onedayonepaper.data.dto.response.MyMemoResponse;
 
 import okhttp3.MultipartBody;
 import okhttp3.RequestBody;
 import retrofit2.Call;
 import retrofit2.http.Body;
+import retrofit2.http.DELETE;
 import retrofit2.http.GET;
 import retrofit2.http.Multipart;
 import retrofit2.http.PATCH;
 import retrofit2.http.POST;
 import retrofit2.http.Part;
+import retrofit2.http.Path;
 import retrofit2.http.Query;
 
 public interface ApiService {
@@ -73,6 +77,12 @@ public interface ApiService {
             @Query("bookId") int bookId,
             @Query("page") int page
     );
+    @GET("/books/my_memo")
+    Call<MyMemoResponse> getMyMemo(@Query("bookId") int bookId);
 
+    @DELETE("/books/{memoId}")
+    Call<BasicResponse> deleteMemo(
+            @Path("memoId") int memoId
+    );
 
 }

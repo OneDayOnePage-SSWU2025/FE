@@ -1,13 +1,16 @@
 package com.example.onedayonepaper.data.item;
 
 public class MemoItem {
-    private String profileUrl;
-    private String nickName;
-    private String memo;
-    private int page;
 
-    public String getProfileUrl() { return profileUrl; }
+    private int memoId;
+    private String imgUrl;
+    private String nickName;
+    private int page;
+    private String memo;
+
+    public int getMemoId() { return memoId; }
+    public String getImgUrl() { return imgUrl; }
     public String getNickName() { return nickName; }
-    public String getMemo() { return memo; }
     public int getPage() { return page; }
+    public String getMemo() { return memo; }
 }

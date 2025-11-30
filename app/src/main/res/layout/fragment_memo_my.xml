@@ -6,7 +6,16 @@
     android:background="@color/background">
 
     <include layout="@layout/fragment_memo_topnav" />
-
+    <TextView
+        android:id="@+id/emptyText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="메모가 아직 없습니다."
+        android:textSize="16sp"
+        android:textColor="@color/deepgreen"
+        android:visibility="gone"
+        android:layout_gravity="center_horizontal"
+        android:padding="16dp"/>
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/memoRecyclerView"
         android:layout_width="match_parent"

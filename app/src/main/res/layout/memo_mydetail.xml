@@ -15,7 +15,7 @@
         android:layout_marginTop="30dp"
         android:id="@+id/profilePreview"
         android:scaleType="centerCrop"
-        android:background="@color/deepgreen"
+        android:background="@drawable/bg_circle_green"
         />
     <LinearLayout
         android:layout_width="wrap_content"
@@ -25,6 +25,7 @@
         android:gravity="center"
         android:orientation="vertical">
         <TextView
+            android:id="@+id/detailMyContent"
             android:layout_width="280dp"
             android:layout_height="300dp"
             android:background="@android:color/transparent"
@@ -34,6 +35,7 @@
             android:fontFamily="@font/scoredream3"
             />
         <TextView
+            android:id="@+id/detailMyPage"
             android:layout_width="match_parent"
             android:layout_height="30dp"
             android:textAlignment="textEnd"
@@ -42,6 +44,7 @@
             />
     </LinearLayout>
     <android.widget.Button
+        android:id="@+id/memoDelBtn"
         android:layout_width="wrap_content"
         android:layout_marginTop="50dp"
         android:layout_height="wrap_content"
