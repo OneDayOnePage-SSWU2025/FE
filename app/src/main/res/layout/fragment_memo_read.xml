@@ -6,25 +6,64 @@
     android:background="@color/background">
 
     <include layout="@layout/fragment_memo_topnav" />
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center_horizontal"
+        android:layout_marginTop="16dp">
 
-    <Spinner
-        android:id="@+id/pageSpinner"
+        <androidx.appcompat.widget.AppCompatSpinner
+            android:id="@+id/pageSpinner"
+            android:layout_width="300dp"
+            android:layout_height="48dp"
+            android:background="@drawable/bg_spinner_round"
+            android:spinnerMode="dropdown"
+            android:popupBackground="@drawable/bg_spinner_popup"
+            android:dropDownVerticalOffset="120dp"
+            android:dropDownHeight="140dp" />
+    </LinearLayout>
+
+
+<LinearLayout
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="horizontal"
+    >
+    <android.widget.Button
+        android:id="@+id/goPre"
+        android:layout_width="50dp"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_vertical"
+        android:background="@drawable/ic_allow_left"/>
+    <TextView
+        android:id="@+id/emptyMemoText"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:text="메모가 아직 없습니다."
+        android:textSize="16sp"
+        android:textColor="@color/deepgreen"
+        android:visibility="gone"
         android:layout_gravity="center_horizontal"
-        android:layout_marginTop="12dp"
-        android:spinnerMode="dropdown"
-        android:popupBackground="@color/white"
-        android:background="@drawable/bg_spinner_round"
-        android:paddingHorizontal="16dp" />
+        android:padding="16dp"/>
+
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/memoRecyclerView"
-        android:layout_width="match_parent"
+        android:layout_width="0dp"
+        android:layout_weight="1"
         android:layout_height="504dp"
         android:paddingHorizontal="20dp"
         android:paddingTop="10dp"
         android:clipToPadding="false" />
+    <android.widget.Button
+        android:id="@+id/goNext"
+        android:layout_width="50dp"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_vertical"
+        android:background="@drawable/ic_allow_left"
+        android:rotation="180"
+        />
+</LinearLayout>
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -33,6 +72,7 @@
         android:layout_gravity="fill_horizontal"
         >
         <TextView
+            android:id="@+id/botInfoTitle"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="책제목"
@@ -42,6 +82,7 @@
             android:layout_height="1dp"
             android:layout_weight="1" />
         <TextView
+            android:id="@+id/botInfoAuthor"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="w저자"

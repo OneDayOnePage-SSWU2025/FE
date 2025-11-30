@@ -68,14 +68,28 @@ public class BookRoomFragment extends Fragment {
         });
 
         btnGoMemo.setOnClickListener(v -> {
-            Fragment memoFragment = new MemoFragment();
-            FragmentTransaction transaction = requireActivity()
-                    .getSupportFragmentManager()
-                    .beginTransaction();
 
-            transaction.replace(R.id.main_frame, memoFragment);
-            transaction.addToBackStack(null);
-            transaction.commit();
+            GroupItem item = groupList.get(selectedIndex);
+
+            int bookId = item.getBook().getBookId();
+            String bookTitle = item.getBook().getBookTitle();
+            String bookAuthor = item.getBook().getAuthor();
+
+            Fragment memoFragment = new MemoFragment();
+
+            Bundle bundle = new Bundle();
+            bundle.putInt("bookId", bookId);
+            bundle.putString("bookTitle", bookTitle);
+            bundle.putString("bookAuthor", bookAuthor);
+
+            memoFragment.setArguments(bundle);
+
+            requireActivity()
+                    .getSupportFragmentManager()
+                    .beginTransaction()
+                    .replace(R.id.main_frame, memoFragment)
+                    .addToBackStack(null)
+                    .commit();
         });
 
         loadGroupDetail();
@@ -93,6 +107,10 @@ public class BookRoomFragment extends Fragment {
 
                     groupList = response.body().getData();
 
+                    if (groupList == null || groupList.isEmpty()) {
+                        showEmptyState();
+                        return;
+                    }
                     setupGroupButtons();
                     displayGroup(selectedIndex);
                     updateButtonUI(selectedIndex);
@@ -104,6 +122,16 @@ public class BookRoomFragment extends Fragment {
                 t.printStackTrace();
             }
         });
+    }
+    private void showEmptyState() {
+        tvBookTitle.setText("참여 중인 독서모임이 없어요");
+        tvBookAuthor.setText("");
+        tvStartDate.setText("");
+        tvLatestPage.setText("");
+
+        ivBookCover.setImageResource(R.drawable.sample_book); // 아무 이미지 넣어도 됨
+
+        layoutGroupTabs.removeAllViews();
     }
 
     private void setupGroupButtons() {

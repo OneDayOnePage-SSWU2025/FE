@@ -23,38 +23,47 @@ public class MemoFragment extends Fragment {
         Button btnWrite = view.findViewById(R.id.memo_write);
         Button btnRead = view.findViewById(R.id.memo_read);
         Button btnMy = view.findViewById(R.id.memo_my);
-
-
+        Bundle args = getArguments();
+        // 메모 작성하기 페이지로 이동
         btnWrite.setOnClickListener(v -> {
+
             Fragment memoWriteFragment = new MemoWriteFragment();
-            FragmentTransaction transaction = requireActivity()
+            memoWriteFragment.setArguments(args);
+
+            requireActivity()
                     .getSupportFragmentManager()
-                    .beginTransaction();
-            transaction.replace(R.id.main_frame, memoWriteFragment);
-            transaction.addToBackStack(null);
-            transaction.commit();
+                    .beginTransaction()
+                    .replace(R.id.main_frame, memoWriteFragment)
+                    .addToBackStack(null)
+                    .commit();
         });
 
-
+        // 메모 모아보기 화면으로 이동
         btnRead.setOnClickListener(v -> {
+
             Fragment memoReadFragment = new MemoReadFragment();
-            FragmentTransaction transaction = requireActivity()
+            memoReadFragment.setArguments(args);
+
+            requireActivity()
                     .getSupportFragmentManager()
-                    .beginTransaction();
-            transaction.replace(R.id.main_frame, memoReadFragment);
-            transaction.addToBackStack(null);
-            transaction.commit();
+                    .beginTransaction()
+                    .replace(R.id.main_frame, memoReadFragment)
+                    .addToBackStack(null)
+                    .commit();
         });
 
-        // 내 메모 화면으로 이동
+        //내 메모 모아보기  화면으로 이동
         btnMy.setOnClickListener(v -> {
+
             Fragment memoMyFragment = new MemoMyFragment();
-            FragmentTransaction transaction = requireActivity()
+            memoMyFragment.setArguments(args);
+
+            requireActivity()
                     .getSupportFragmentManager()
-                    .beginTransaction();
-            transaction.replace(R.id.main_frame, memoMyFragment);
-            transaction.addToBackStack(null);
-            transaction.commit();
+                    .beginTransaction()
+                    .replace(R.id.main_frame, memoMyFragment)
+                    .addToBackStack(null)
+                    .commit();
         });
 
         return view;

@@ -21,6 +21,7 @@ public class MainActivity extends AppCompatActivity {
         getSupportFragmentManager().beginTransaction()
                 .replace(R.id.main_frame, new HomeFragment())
                 .commit();
+        bottomNavigationView.setSelectedItemId(R.id.bottom_home);
         bottomNavigationView.setOnItemSelectedListener(item -> {
             Fragment selectedFragment = null;
 
