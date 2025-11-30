@@ -49,8 +49,9 @@ public class CustomSpinnerAdapter extends BaseAdapter {
             convertView = inflater.inflate(R.layout.item_spinner_dropdown, parent, false);
         }
 
-        TextView tv = convertView.findViewById(R.id.tvDropdown);
-        tv.setText(pages.get(position));
+      /*  TextView tv = convertView.findViewById(R.id.tvDropdown);
+        tv.setText(pages.get(position));*/
+//TODO 여기 수진이 드롭다운 수정필요
 
         return convertView;
     }

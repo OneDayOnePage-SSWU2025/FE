@@ -129,7 +129,11 @@ public class BookRoomFragment extends Fragment {
         tvStartDate.setText("");
         tvLatestPage.setText("");
 
-        ivBookCover.setImageResource(R.drawable.sample_book); // 아무 이미지 넣어도 됨
+        ivBookCover.setVisibility(View.INVISIBLE);
+
+        btnGoMemo.setEnabled(false);
+        btnGoMemo.setAlpha(0.4f);
+        btnGoMemo.setClickable(false);
 
         layoutGroupTabs.removeAllViews();
     }
