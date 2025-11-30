@@ -133,11 +133,13 @@ public class MemoWriteFragment extends Fragment {
                 public void onResponse(Call<Void> call, Response<Void> response) {
 
                     if (response.isSuccessful()) {
-                        Toast.makeText(requireContext(), "메모가 저장되었습니다!", Toast.LENGTH_SHORT).show();
 
-                        memoEdit.setText("");
-                        pageSpinner.setSelection(0);
-                        memoSendBtn.setBackgroundResource(R.drawable.btn_check_off);
+                        MemoSuccessFragment successFragment = new MemoSuccessFragment();
+
+                        requireActivity().getSupportFragmentManager()
+                                .beginTransaction()
+                                .replace(R.id.main_frame, successFragment)
+                                .commit();
                     } else {
                         Toast.makeText(requireContext(), "저장 실패", Toast.LENGTH_SHORT).show();
                     }
