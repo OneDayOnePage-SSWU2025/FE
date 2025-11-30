@@ -84,5 +84,4 @@ public interface ApiService {
     Call<BasicResponse> deleteMemo(
             @Path("memoId") int memoId
     );
-
 }

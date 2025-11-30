@@ -153,14 +153,21 @@ public class MakeGroupFragment extends Fragment {
         etSearchBook.setDropDownBackgroundResource(R.drawable.spinner_popup_bg);
         etSearchBook.setThreshold(1);
 
+        etSearchBook.setOnClickListener(v -> {
+            etSearchBook.showDropDown();
+        });
+
+        tvSelectedBook.setOnClickListener(v -> {
+            etSearchBook.requestFocus();
+            etSearchBook.showDropDown();
+        });
+
         etSearchBook.addTextChangedListener(new TextWatcher() {
             @Override
-            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
-            }
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {}
 
             @Override
-            public void afterTextChanged(Editable s) {
-            }
+            public void afterTextChanged(Editable s) {}
 
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
@@ -192,6 +199,9 @@ public class MakeGroupFragment extends Fragment {
             tvSelectedBook.setText(title);
             tvSelectedBook.setTextColor(Color.BLACK);
 
+            etSearchBook.setText(title);
+            etSearchBook.setSelection(title.length());
+
             searchBookInfoFromAladin(isbn);
         });
 
@@ -204,7 +214,7 @@ public class MakeGroupFragment extends Fragment {
 
     private void searchBooksFromAladin(String query) {
 
-        String TTB_KEY = "ttbquffl20021619001";
+        String TTB_KEY = "//TODO";
 
         AladinApiService api = AladinApiClient.getClient().create(AladinApiService.class);
 
@@ -238,11 +248,6 @@ public class MakeGroupFragment extends Fragment {
                             new ArrayList<>(searchTitles)
                     );
                     etSearchBook.setAdapter(searchAdapter);
-
-
-                    if (!userSelectedItem) {
-                        etSearchBook.showDropDown();
-                    }
 
                 } catch (Exception e) {
                     e.printStackTrace();
@@ -416,71 +421,71 @@ public class MakeGroupFragment extends Fragment {
         return null;
     }
 
-private void createGroup() {
+    private void createGroup() {
 
-    String groupName = etName.getText().toString().trim();
-    String codeStr = etCode.getText().toString().trim();
+        String groupName = etName.getText().toString().trim();
+        String codeStr = etCode.getText().toString().trim();
 
-    if (groupName.isEmpty()) {
-        Toast.makeText(requireContext(), "교환독서방 이름을 입력해주세요.", Toast.LENGTH_SHORT).show();
-        return;
-    }
+        if (groupName.isEmpty()) {
+            Toast.makeText(requireContext(), "교환독서방 이름을 입력해주세요.", Toast.LENGTH_SHORT).show();
+            return;
+        }
 
-    if (codeStr.isEmpty()) {
-        Toast.makeText(requireContext(), "참가 코드를 입력해주세요.", Toast.LENGTH_SHORT).show();
-        return;
-    }
+        if (codeStr.isEmpty()) {
+            Toast.makeText(requireContext(), "참가 코드를 입력해주세요.", Toast.LENGTH_SHORT).show();
+            return;
+        }
 
-    if (selectedTheme == null) {
-        Toast.makeText(requireContext(), "그룹 테마를 선택해주세요.", Toast.LENGTH_SHORT).show();
-        return;
-    }
+        if (selectedTheme == null) {
+            Toast.makeText(requireContext(), "그룹 테마를 선택해주세요.", Toast.LENGTH_SHORT).show();
+            return;
+        }
 
-    if (selectedBook == null) {
-        Toast.makeText(requireContext(), "첫 교환도서를 선택해주세요.", Toast.LENGTH_SHORT).show();
-        return;
-    }
+        if (selectedBook == null) {
+            Toast.makeText(requireContext(), "첫 교환도서를 선택해주세요.", Toast.LENGTH_SHORT).show();
+            return;
+        }
 
-    int code;
-    try {
-        code = Integer.parseInt(codeStr);
-    } catch (Exception e) {
-        Toast.makeText(requireContext(), "참가 코드는 숫자여야 합니다.", Toast.LENGTH_SHORT).show();
-        return;
-    }
+        int code;
+        try {
+            code = Integer.parseInt(codeStr);
+        } catch (Exception e) {
+            Toast.makeText(requireContext(), "참가 코드는 숫자여야 합니다.", Toast.LENGTH_SHORT).show();
+            return;
+        }
 
-    CreateGroupRequest request = new CreateGroupRequest(
-            groupName,
-            code,
-            selectedTheme,
-            selectedBook.getImgUrl(),
-            selectedBook.getTitle(),
-            selectedBook.getAuthor(),
-            selectedBook.getTotalPage()
-    );
+        CreateGroupRequest request = new CreateGroupRequest(
+                groupName,
+                code,
+                selectedTheme,
+                selectedBook.getImgUrl(),
+                selectedBook.getTitle(),
+                selectedBook.getAuthor(),
+                selectedBook.getTotalPage()
+        );
 
-    ApiService api = ApiClient.getClient(requireContext()).create(ApiService.class);
+        ApiService api = ApiClient.getClient(requireContext()).create(ApiService.class);
 
-    api.createGroup(request).enqueue(new Callback<Void>() {
-        @Override
-        public void onResponse(Call<Void> call,
-                               Response<Void> response) {
+        api.createGroup(request).enqueue(new Callback<Void>() {
+            @Override
+            public void onResponse(Call<Void> call,
+                                   Response<Void> response) {
 
-            if (response.isSuccessful()) {
-                Toast.makeText(requireContext(), "그룹 생성 완료!", Toast.LENGTH_SHORT).show();
-                requireActivity().getSupportFragmentManager().popBackStack();
-            } else {
-                Toast.makeText(requireContext(),
-                        "생성 실패 (코드 " + response.code() + ")",
-                        Toast.LENGTH_LONG).show();
+                if (response.isSuccessful()) {
+                    Toast.makeText(requireContext(), "그룹 생성 완료!", Toast.LENGTH_SHORT).show();
+                    requireActivity().getSupportFragmentManager().popBackStack();
+                } else {
+                    Toast.makeText(requireContext(),
+                            "생성 실패 (코드 " + response.code() + ")",
+                            Toast.LENGTH_LONG).show();
+                }
             }
-        }
 
-        @Override
-        public void onFailure(Call<Void> call, Throwable t) {
-            Toast.makeText(requireContext(), "서버 연결 실패", Toast.LENGTH_SHORT).show();
-            t.printStackTrace();
-        }
-    });
-}
+            @Override
+            public void onFailure(Call<Void> call, Throwable t) {
+                Toast.makeText(requireContext(), "서버 연결 실패", Toast.LENGTH_SHORT).show();
+                t.printStackTrace();
+            }
+        });
+    }
 }
