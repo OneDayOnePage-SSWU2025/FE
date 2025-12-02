@@ -25,6 +25,12 @@
             android:layout_margin="20dp"
             android:adjustViewBounds="true"
             android:src="@drawable/side_logo" />
+        <include
+            android:id="@+id/layoutEmpty"
+            layout="@layout/item_home_null"
+            android:visibility="gone"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"/>
 
         <androidx.viewpager2.widget.ViewPager2
             android:id="@+id/viewPagerScene"
@@ -58,10 +64,4 @@
                 android:background="@drawable/dot_inactive" />
         </LinearLayout>
     </LinearLayout>
-    <include
-        android:id="@+id/layoutEmpty"
-        layout="@layout/item_home_null"
-        android:visibility="gone"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"/>
 </LinearLayout>
