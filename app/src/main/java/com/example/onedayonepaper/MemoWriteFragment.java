@@ -2,6 +2,9 @@ package com.example.onedayonepaper;
 
 import static androidx.core.util.TypedValueCompat.dpToPx;
 
+import android.content.Context;
+import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
@@ -14,6 +17,7 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.ListPopupWindow;
 import android.widget.Spinner;
 import android.widget.TextView;
@@ -230,41 +234,40 @@ public class MemoWriteFragment extends Fragment {
             pages.add(i + " p");
         }
 
+        LinearLayout spinnerLayout = requireView().findViewById(R.id.pageSpinnerLayout);
+        TextView tvSelected = requireView().findViewById(R.id.tvSelectedPage);
+        ImageView arrow = requireView().findViewById(R.id.ivArrow);
+
+
+        ListPopupWindow popup = new ListPopupWindow(requireContext());
         CustomSpinnerAdapter adapter = new CustomSpinnerAdapter(requireContext(), pages);
-        pageSpinner.setAdapter(adapter);
+        popup.setAdapter(adapter);
+        popup.setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+        popup.setAnchorView(spinnerLayout);
+        popup.setModal(true);
 
-        pageSpinner.post(new Runnable() {
-            @Override
-            public void run() {
-                pageSpinner.setDropDownVerticalOffset(pageSpinner.getHeight());
+        int itemHeight = (int) dpToPx(requireContext(), 48);
+        popup.setHeight(itemHeight * 5);
 
-            }
+        popup.setWidth(spinnerLayout.getWidth());
+
+        spinnerLayout.setOnClickListener(v -> {
+            arrow.animate().rotation(180).setDuration(200).start();
+            popup.show();
         });
 
-
-        pageSpinner.setOnTouchListener(new View.OnTouchListener() {
-            @Override
-            public boolean onTouch(View v, MotionEvent event) {
-
-                if (event.getAction() == MotionEvent.ACTION_DOWN) {
-                    rotateArrow(true);
-                }
-                return false;
-            }
+        popup.setOnDismissListener(() -> {
+            arrow.animate().rotation(0).setDuration(200).start();
         });
 
-
-        pageSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-            @Override
-            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                rotateArrow(false);
-            }
-
-            @Override
-            public void onNothingSelected(AdapterView<?> parent) {
-            }
+        popup.setOnItemClickListener((parent, view, position, id) -> {
+            tvSelected.setText(pages.get(position));
+            popup.dismiss();
         });
 
+    }
+    private int dpToPx(Context context, int dp) {
+        return (int) (dp * context.getResources().getDisplayMetrics().density);
     }
 
 

@@ -25,7 +25,7 @@ public class MemoSuccessFragment extends Fragment {
             requireActivity()
                     .getSupportFragmentManager()
                     .beginTransaction()
-                    .replace(R.id.main_frame, new MemoFragment())
+                    .replace(R.id.main_frame, new BookRoomFragment())
                     .commit();
 
         }, 1000);
