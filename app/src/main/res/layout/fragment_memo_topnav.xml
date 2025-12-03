@@ -15,6 +15,7 @@
     <TextView
         android:id="@+id/bookTitle"
         android:layout_width="0dp"
+        android:paddingHorizontal="50dp"
         android:layout_height="wrap_content"
         android:layout_weight="1"
         android:gravity="center"
@@ -22,6 +23,9 @@
         android:textColor="@color/deepgreen"
         android:textSize="20sp"
         android:layout_marginLeft="-40dp"
+        android:maxLines="1"
+        android:singleLine="true"
+        android:ellipsize="end"
         />
 
 </LinearLayout>
