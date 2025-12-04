@@ -7,14 +7,21 @@
     android:gravity="center_horizontal"
     android:background="@color/background">
 
+    <ImageView
+        android:id="@+id/ivLogo"
+        android:layout_width="140dp"
+        android:layout_height="wrap_content"
+        android:layout_gravity="start"
+        android:layout_margin="20dp"
+        android:adjustViewBounds="true"
+        android:src="@drawable/side_logo" />
+
     <com.google.android.material.imageview.ShapeableImageView
         android:id="@+id/profileImg"
         android:layout_width="145dp"
         android:layout_height="145dp"
-        android:layout_marginTop="5dp"
         android:layout_marginBottom="5dp"
         android:scaleType="centerCrop"
-        android:src="@drawable/test_profile"
         app:shapeAppearanceOverlay="@style/CircleImage" />
 
     <LinearLayout
@@ -25,7 +32,7 @@
             android:id="@+id/nickName"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="유우시 사랑해"
+            android:text=""
             android:textSize="18sp"
             android:layout_marginTop="5dp"
             android:layout_gravity="center"/>
@@ -81,7 +88,7 @@
             android:id="@+id/bookCountTxt"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="나는 총 19권의 \n책을 읽었어요"
+            android:text="나는 총 권의 \n책을 읽었어요"
             android:gravity="right"
             android:textColor="#FFFFF5"
             android:layout_marginLeft="43dp"
@@ -123,7 +130,7 @@
             android:id="@+id/memoCountTxt"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="나는 총 19개의 \n메모를 남겼어요"
+            android:text="나는 총 개의 \n메모를 남겼어요"
             android:gravity="right"
             android:textColor="#FFFFF5"
             android:layout_marginLeft="45dp"
