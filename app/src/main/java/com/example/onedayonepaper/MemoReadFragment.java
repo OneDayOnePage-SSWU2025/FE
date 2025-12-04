@@ -1,17 +1,13 @@
-
 package com.example.onedayonepaper;
 
 import android.os.Bundle;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.view.LayoutInflater;
-import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
 import android.widget.Button;
-import android.widget.ImageView;
-import android.widget.SeekBar;
-import android.widget.Spinner;
+import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -25,7 +21,6 @@ import com.example.onedayonepaper.data.api.ApiClient;
 import com.example.onedayonepaper.data.api.ApiService;
 import com.example.onedayonepaper.data.dto.response.BookTotalPageResponse;
 import com.example.onedayonepaper.data.dto.response.MemoListResponse;
-import com.example.onedayonepaper.data.item.MemoItem;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -37,17 +32,16 @@ import retrofit2.Response;
 public class MemoReadFragment extends Fragment {
 
     private ReadMemoAdapter adapter;
-    private Spinner pageSpinner;
-    private SeekBar pageSeekBar;
+
+    private EditText pageSearchEdit;
 
     private int totalPageCount = 0;
     private int currentPage = 1;
 
-    private List<ReadMemo> allMemos = new ArrayList<>();
-
     private int bookId;
     private String bookTitle;
     private String bookAuthor;
+
     private TextView emptyMemoText;
 
     @Override
@@ -58,8 +52,6 @@ public class MemoReadFragment extends Fragment {
             bookId = getArguments().getInt("bookId");
             bookTitle = getArguments().getString("bookTitle");
             bookAuthor = getArguments().getString("bookAuthor");
-        } else {
-            Toast.makeText(requireContext(), "북정보 불러와지지 않음", Toast.LENGTH_SHORT).show();
         }
     }
 
@@ -71,7 +63,6 @@ public class MemoReadFragment extends Fragment {
 
         View view = inflater.inflate(R.layout.fragment_memo_read, container, false);
 
-
         TextView titleText = view.findViewById(R.id.bookTitle);
         TextView botInfoTitle = view.findViewById(R.id.botInfoTitle);
         TextView botInfoAuthor = view.findViewById(R.id.botInfoAuthor);
@@ -80,114 +71,148 @@ public class MemoReadFragment extends Fragment {
         botInfoTitle.setText(bookTitle);
         botInfoAuthor.setText(bookAuthor);
 
-        Button backBtn = view.findViewById(R.id.backBtn);
-        backBtn.setOnClickListener(v -> requireActivity().getSupportFragmentManager().popBackStack());
+        view.findViewById(R.id.backBtn).setOnClickListener(v ->
+                requireActivity().getSupportFragmentManager().popBackStack()
+        );
 
-        pageSpinner = view.findViewById(R.id.pageSpinner);
-        pageSeekBar = view.findViewById(R.id.pageSeekBar);
+        pageSearchEdit = view.findViewById(R.id.pageSearchEdit);
 
-        Button btnPrev = view.findViewById(R.id.goPre);
-        Button btnNext = view.findViewById(R.id.goNext);
         emptyMemoText = view.findViewById(R.id.emptyMemoText);
-
 
         RecyclerView recyclerView = view.findViewById(R.id.memoRecyclerView);
         recyclerView.setLayoutManager(new LinearLayoutManager(requireContext()));
-
         adapter = new ReadMemoAdapter(requireContext(), new ArrayList<>());
-
         recyclerView.setAdapter(adapter);
 
+        Button btnPrev = view.findViewById(R.id.goPre);
+        Button btnNext = view.findViewById(R.id.goNext);
+
+        btnPrev.setOnClickListener(v -> {
+            movePage(-1);
+            pageSearchEdit.setText(String.valueOf(currentPage));
+        });
+
+        btnNext.setOnClickListener(v -> {
+            movePage(1);
+            pageSearchEdit.setText(String.valueOf(currentPage));
+        });
+
+        Button memoWriteBtn = view.findViewById(R.id.memo_write);
+        memoWriteBtn.setOnClickListener(v -> openMemoWritePage());
 
         loadTotalPage();
 
-        btnPrev.setOnClickListener(v -> movePage(-1));
-        btnNext.setOnClickListener(v -> movePage(1));
-
         return view;
     }
-
 
     private void loadTotalPage() {
         ApiService api = ApiClient.getClient(requireContext()).create(ApiService.class);
 
         api.getTotalPage(bookId).enqueue(new Callback<BookTotalPageResponse>() {
             @Override
-            public void onResponse(Call<BookTotalPageResponse> call, Response<BookTotalPageResponse> response) {
-                if (response.isSuccessful() && response.body() != null) {
+            public void onResponse(Call<BookTotalPageResponse> call,
+                                   Response<BookTotalPageResponse> response) {
 
+                if (response.isSuccessful() && response.body() != null) {
                     totalPageCount = response.body().getData();
 
-                    setupSpinner(totalPageCount);
-                    setupSeekBar(totalPageCount);
+                    pageSearchEdit.setText(String.valueOf(currentPage));
 
-                    adapter.updateData(allMemos);
+                    setupPageSearch();
                 }
             }
 
             @Override
             public void onFailure(Call<BookTotalPageResponse> call, Throwable t) {
-                Toast.makeText(requireContext(), "페이지 수 불러오기 실패", Toast.LENGTH_SHORT).show();
                 t.printStackTrace();
             }
         });
     }
 
+    private void setupPageSearch() {
 
-    private void rotateArrow(boolean isOpen) {
-        View selected = pageSpinner.getSelectedView();
-        if (selected == null) return;
+        pageSearchEdit.setOnEditorActionListener((v, actionId, event) -> {
+            String input = v.getText().toString();
 
-        ImageView arrow = selected.findViewById(R.id.ivArrow);
-        if (arrow == null) return;
-
-        float degree = isOpen ? 180f : 0f;
-
-        arrow.animate().rotation(degree).setDuration(200).start();
-    }
-
-    private void setupSpinner(int totalPageCount) {
-
-        List<String> pages = new ArrayList<>();
-        for (int i = 1; i <= totalPageCount; i++) {
-            pages.add(i + " p");
-        }
-
-        CustomSpinnerAdapter spinnerAdapter = new CustomSpinnerAdapter(requireContext(), pages);
-        pageSpinner.setAdapter(spinnerAdapter);
-
-        pageSpinner.post(() -> pageSpinner.setDropDownVerticalOffset(pageSpinner.getHeight()));
-
-        pageSpinner.setOnTouchListener((v, event) -> {
-            if (event.getAction() == MotionEvent.ACTION_DOWN) rotateArrow(true);
-            return false;
-        });
-
-        pageSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-            @Override
-            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                rotateArrow(false);
-
-                currentPage = position + 1;
-
-                pageSeekBar.setProgress(currentPage);
-
-                loadMemosByPage(currentPage);
+            if (input.isEmpty()) {
+                Toast.makeText(requireContext(), "페이지 번호를 입력해주세요.", Toast.LENGTH_SHORT).show();
+                return true;
             }
 
-            @Override
-            public void onNothingSelected(AdapterView<?> parent) {}
+            int page = Integer.parseInt(input);
+
+            if (page < 1) {
+                Toast.makeText(requireContext(), "최소 페이지는 1입니다.", Toast.LENGTH_SHORT).show();
+                page = 1;
+            }
+
+            if (page > totalPageCount) {
+                Toast.makeText(requireContext(),
+                        "최대 페이지는 " + totalPageCount + "p 입니다.",
+                        Toast.LENGTH_SHORT).show();
+                page = totalPageCount;
+            }
+
+            currentPage = page;
+
+            pageSearchEdit.setText(String.valueOf(page));
+            pageSearchEdit.setSelection(String.valueOf(page).length());
+
+            loadMemosByPage(page);
+
+            return true;
         });
 
+
+        pageSearchEdit.addTextChangedListener(new TextWatcher() {
+            @Override public void beforeTextChanged(CharSequence s, int start, int count, int after) {}
+            @Override public void onTextChanged(CharSequence s, int start, int before, int count) {}
+
+            @Override
+            public void afterTextChanged(Editable s) {
+                String filtered = s.toString().replaceAll("[^0-9]", "");
+
+                if (!filtered.equals(s.toString())) {
+                    pageSearchEdit.setText(filtered);
+                    pageSearchEdit.setSelection(filtered.length());
+                    return;
+                }
+
+                if (filtered.isEmpty()) return;
+
+                int page = Integer.parseInt(filtered);
+
+                if (page < 1) {
+                    Toast.makeText(requireContext(), "최소 페이지는 1입니다.", Toast.LENGTH_SHORT).show();
+                    pageSearchEdit.setText("1");
+                    pageSearchEdit.setSelection(1);
+                    currentPage = 1;
+                    loadMemosByPage(1);
+                    return;
+                }
+
+                if (page > totalPageCount) {
+                    Toast.makeText(requireContext(),
+                            "최대 페이지는 " + totalPageCount + "p 입니다.",
+                            Toast.LENGTH_SHORT).show();
+
+                    pageSearchEdit.setText(String.valueOf(totalPageCount));
+                    pageSearchEdit.setSelection(String.valueOf(totalPageCount).length());
+                    currentPage = totalPageCount;
+                    loadMemosByPage(currentPage);
+                }
+            }
+        });
     }
 
     private void loadMemosByPage(int page) {
-
         ApiService api = ApiClient.getClient(requireContext()).create(ApiService.class);
 
         api.getMemoByPage(bookId, page).enqueue(new Callback<MemoListResponse>() {
             @Override
-            public void onResponse(Call<MemoListResponse> call, Response<MemoListResponse> response) {
+            public void onResponse(Call<MemoListResponse> call,
+                                   Response<MemoListResponse> response) {
+
                 if (response.isSuccessful() && response.body() != null) {
 
                     List<ReadMemo> memos = response.body().getData();
@@ -206,10 +231,31 @@ public class MemoReadFragment extends Fragment {
                 t.printStackTrace();
             }
         });
-
-
-
     }
+
+    private void movePage(int direction) {
+        int newPage = Math.max(1, Math.min(currentPage + direction, totalPageCount));
+        currentPage = newPage;
+        loadMemosByPage(newPage);
+    }
+
+    private void openMemoWritePage() {
+        Fragment fragment = new MemoWriteFragment();
+
+        Bundle args = new Bundle();
+        args.putInt("bookId", bookId);
+        args.putString("bookTitle", bookTitle);
+        args.putString("bookAuthor", bookAuthor);
+        args.putInt("currentPage", currentPage);
+
+        fragment.setArguments(args);
+
+        requireActivity().getSupportFragmentManager().beginTransaction()
+                .replace(R.id.main_frame, fragment)
+                .addToBackStack(null)
+                .commit();
+    }
+
     private void showNoMemoView() {
         emptyMemoText.setVisibility(View.VISIBLE);
         adapter.updateData(new ArrayList<>());
@@ -218,52 +264,4 @@ public class MemoReadFragment extends Fragment {
     private void hideNoMemoView() {
         emptyMemoText.setVisibility(View.GONE);
     }
-
-    private void setupSeekBar(int totalPageCount) {
-        pageSeekBar.setMax(totalPageCount);
-
-        pageSeekBar.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
-            @Override
-            public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
-                if (!fromUser) return;
-
-                int selectedPage = Math.max(progress, 1);
-
-                currentPage = selectedPage;
-
-                pageSpinner.setSelection(selectedPage - 1);
-
-                loadMemosByPage(selectedPage);
-            }
-
-
-            @Override public void onStartTrackingTouch(SeekBar seekBar) {}
-            @Override public void onStopTrackingTouch(SeekBar seekBar) {}
-        });
-    }
-
-
-    private void movePage(int direction) {
-
-        int newPage = currentPage + direction;
-
-        if (newPage < 1) newPage = 1;
-        if (newPage > totalPageCount) newPage = totalPageCount;
-
-        currentPage = newPage;
-
-        pageSeekBar.setProgress(newPage);
-        pageSpinner.setSelection(newPage - 1);
-
-        loadMemosByPage(newPage);
-    }
-
-
-
-    private void filterMemosByPage(int page) {
-        loadMemosByPage(page);
-    }
-
-
-
 }
