@@ -6,19 +6,31 @@
     android:gravity="center_horizontal">
 
     <include layout="@layout/fragment_memo_topnav" />
-
-    <androidx.appcompat.widget.AppCompatSpinner
-        android:id="@+id/pageSpinner"
+    <LinearLayout
+        android:id="@+id/pageSpinnerLayout"
         android:layout_width="300dp"
         android:layout_height="48dp"
         android:background="@drawable/bg_spinner_round"
-        android:spinnerMode="dropdown"
-        android:popupBackground="@drawable/bg_spinner_popup"
+        android:gravity="center_vertical"
+        android:paddingHorizontal="12dp"
         android:layout_marginTop="16dp"
-        android:layout_gravity="center_horizontal"
-        android:dropDownVerticalOffset="120dp"
-        android:dropDownHeight="140dp"
-        />
+        android:layout_gravity="center_horizontal">
+
+        <TextView
+            android:id="@+id/tvSelectedPage"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="1 p"
+            android:textSize="16sp"
+            android:textColor="#1A1A1A" />
+
+        <ImageView
+            android:id="@+id/ivArrow"
+            android:layout_width="20dp"
+            android:layout_height="20dp"
+            android:src="@drawable/ic_arrow_down"/>
+    </LinearLayout>
 
 
     <ImageView

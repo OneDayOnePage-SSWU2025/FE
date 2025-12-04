@@ -30,28 +30,22 @@ public class CustomSpinnerAdapter extends BaseAdapter {
     @Override
     public long getItemId(int position) { return position; }
 
+
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
 
-        if (convertView == null) {
-            convertView = inflater.inflate(R.layout.custom_spinner, parent, false);
-        }
-
-        TextView tv = convertView.findViewById(R.id.tvSelected);
-        tv.setText(pages.get(position));
-
-        return convertView;
+        return getDropDownView(position, convertView, parent);
     }
 
     @Override
     public View getDropDownView(int position, View convertView, ViewGroup parent) {
         if (convertView == null) {
-            convertView = inflater.inflate(R.layout.item_spinner_dropdown, parent, false);
+            convertView = inflater.inflate(R.layout.memo_spinner_dropdown, parent, false);
         }
 
-      /*  TextView tv = convertView.findViewById(R.id.tvDropdown);
-        tv.setText(pages.get(position));*/
-//TODO 여기 수진이 드롭다운 수정필요
+      TextView tv = convertView.findViewById(R.id.tvDropdown);
+        tv.setText(pages.get(position));
+
 
         return convertView;
     }
