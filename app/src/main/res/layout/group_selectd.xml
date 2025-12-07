@@ -24,6 +24,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal" />
+
         </HorizontalScrollView>
 
         <androidx.appcompat.widget.AppCompatButton
@@ -39,15 +40,31 @@
 
     </LinearLayout>
 
-
-    <ImageView
-        android:id="@+id/ivBookCover"
+    <FrameLayout
+        android:id="@+id/bookCoverContainer"
         android:layout_width="match_parent"
         android:layout_height="529dp"
-        android:layout_gravity="center"
-        android:adjustViewBounds="true"
-        android:background="#00000010"
-        android:scaleType="centerCrop" />
+        android:layout_gravity="center">
+
+        <ImageView
+            android:id="@+id/ivBookCover"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:adjustViewBounds="true"
+            android:background="#00000010"
+            android:scaleType="centerCrop" />
+
+        <ImageView
+            android:id="@+id/ivEditPen"
+            android:layout_width="36dp"
+            android:layout_height="36dp"
+            android:layout_gravity="top|end"
+            android:layout_margin="12dp"
+            android:padding="4dp"
+            android:src="@drawable/ic_pen"
+            android:visibility="gone"/>
+
+    </FrameLayout>
 
     <LinearLayout
         android:layout_width="355dp"
@@ -71,7 +88,6 @@
                 android:layout_height="wrap_content"
                 android:ellipsize="end"
                 android:maxLines="1"
-                android:singleLine="true"
                 android:text="책 제목"
                 android:textColor="#FFFDF9"
                 android:textSize="22sp"
@@ -99,13 +115,11 @@
                 android:ellipsize="end"
                 android:gravity="end"
                 android:maxLines="1"
-                android:singleLine="true"
                 android:text="저자"
                 android:textColor="#FFFDF9"
                 android:textSize="14sp" />
 
         </RelativeLayout>
-
 
         <TextView
             android:id="@+id/tvLatestPage"

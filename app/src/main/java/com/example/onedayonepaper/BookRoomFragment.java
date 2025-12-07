@@ -5,21 +5,21 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
+import android.widget.LinearLayout;
+import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.widget.AppCompatButton;
 import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentTransaction;
-
-import android.widget.ImageView;
-import android.widget.LinearLayout;
-import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
 import com.example.onedayonepaper.data.api.ApiClient;
 import com.example.onedayonepaper.data.api.ApiService;
 import com.example.onedayonepaper.data.dto.response.GroupsResponse;
+import com.example.onedayonepaper.data.dto.response.OwnerResponse;
+import com.example.onedayonepaper.data.dto.response.GroupEditResponse;
 import com.example.onedayonepaper.data.item.GroupItem;
 
 import java.util.ArrayList;
@@ -34,7 +34,7 @@ public class BookRoomFragment extends Fragment {
     private List<GroupItem> groupList = new ArrayList<>();
 
     LinearLayout layoutGroupTabs;
-    ImageView ivBookCover;
+    ImageView ivBookCover, ivEditPen;
     TextView tvBookTitle, tvBookAuthor, tvStartDate, tvLatestPage;
     AppCompatButton btnAddGroup, btnGoMemo;
 
@@ -53,6 +53,8 @@ public class BookRoomFragment extends Fragment {
         btnGoMemo = view.findViewById(R.id.gomemo);
 
         ivBookCover = view.findViewById(R.id.ivBookCover);
+        ivEditPen = view.findViewById(R.id.ivEditPen);
+
         tvBookTitle = view.findViewById(R.id.tvBookTitle);
         tvBookAuthor = view.findViewById(R.id.tvBookAuthor);
         tvStartDate = view.findViewById(R.id.tvStartDate);
@@ -68,19 +70,13 @@ public class BookRoomFragment extends Fragment {
         });
 
         btnGoMemo.setOnClickListener(v -> {
-
             GroupItem item = groupList.get(selectedIndex);
 
-            int bookId = item.getBook().getBookId();
-            String bookTitle = item.getBook().getBookTitle();
-            String bookAuthor = item.getBook().getAuthor();
-
             Fragment memoFragment = new MemoFragment();
-
             Bundle bundle = new Bundle();
-            bundle.putInt("bookId", bookId);
-            bundle.putString("bookTitle", bookTitle);
-            bundle.putString("bookAuthor", bookAuthor);
+            bundle.putInt("bookId", item.getBook().getBookId());
+            bundle.putString("bookTitle", item.getBook().getBookTitle());
+            bundle.putString("bookAuthor", item.getBook().getAuthor());
 
             memoFragment.setArguments(bundle);
 
@@ -92,8 +88,12 @@ public class BookRoomFragment extends Fragment {
                     .commit();
         });
 
-        loadGroupDetail();
+        ivEditPen.setOnClickListener(v -> {
+            GroupItem item = groupList.get(selectedIndex);
+            loadGroupEditInfo(item.getGroupId());
+        });
 
+        loadGroupDetail();
         return view;
     }
 
@@ -111,6 +111,7 @@ public class BookRoomFragment extends Fragment {
                         showEmptyState();
                         return;
                     }
+
                     setupGroupButtons();
                     displayGroup(selectedIndex);
                     updateButtonUI(selectedIndex);
@@ -123,6 +124,7 @@ public class BookRoomFragment extends Fragment {
             }
         });
     }
+
     private void showEmptyState() {
         tvBookTitle.setText("참여 중인 독서모임이 없어요");
         tvBookAuthor.setText("");
@@ -130,6 +132,7 @@ public class BookRoomFragment extends Fragment {
         tvLatestPage.setText("");
 
         ivBookCover.setVisibility(View.INVISIBLE);
+        ivEditPen.setVisibility(View.GONE);
 
         btnGoMemo.setEnabled(false);
         btnGoMemo.setAlpha(0.4f);
@@ -174,6 +177,72 @@ public class BookRoomFragment extends Fragment {
         Glide.with(this)
                 .load(item.getBook().getImgUrl())
                 .into(ivBookCover);
+
+        checkIsOwner(item.getGroupId());
+    }
+
+    private void checkIsOwner(int groupId) {
+
+        ApiService api = ApiClient.getClient(requireContext()).create(ApiService.class);
+
+        api.isGroupOwner(groupId).enqueue(new Callback<OwnerResponse>() {
+            @Override
+            public void onResponse(Call<OwnerResponse> call, Response<OwnerResponse> response) {
+
+                if (response.isSuccessful() && response.body() != null) {
+                    boolean owner = response.body().getData();
+
+                    if (owner) ivEditPen.setVisibility(View.VISIBLE);
+                    else ivEditPen.setVisibility(View.GONE);
+                }
+            }
+
+            @Override
+            public void onFailure(Call<OwnerResponse> call, Throwable t) {
+                t.printStackTrace();
+                ivEditPen.setVisibility(View.GONE);
+            }
+        });
+    }
+
+    private void loadGroupEditInfo(int groupId) {
+
+        ApiService api = ApiClient.getClient(requireContext()).create(ApiService.class);
+
+        api.getGroupForEdit(groupId).enqueue(new Callback<GroupEditResponse>() {
+            @Override
+            public void onResponse(Call<GroupEditResponse> call, Response<GroupEditResponse> response) {
+
+                if (response.isSuccessful() && response.body() != null) {
+                    GroupEditResponse data = response.body();
+
+                    Fragment editFragment = new GroupEditFragment();
+                    Bundle bundle = new Bundle();
+
+                    bundle.putInt("groupId", data.getGroupId());
+                    bundle.putString("groupName", data.getGroupName());
+                    bundle.putInt("code", data.getCode());
+                    bundle.putString("theme", data.getTheme());
+
+                    if (data.getBookNames() != null && !data.getBookNames().isEmpty()) {
+                        bundle.putString("bookName", data.getBookNames().get(0));
+                    }
+
+                    editFragment.setArguments(bundle);
+
+                    requireActivity().getSupportFragmentManager()
+                            .beginTransaction()
+                            .replace(R.id.main_frame, editFragment)
+                            .addToBackStack(null)
+                            .commit();
+                }
+            }
+
+            @Override
+            public void onFailure(Call<GroupEditResponse> call, Throwable t) {
+                t.printStackTrace();
+            }
+        });
     }
 
     private void updateButtonUI(int selectedIndex) {
