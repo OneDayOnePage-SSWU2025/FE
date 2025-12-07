@@ -8,13 +8,16 @@ import com.example.onedayonepaper.data.dto.SignUpResponse;
 import com.example.onedayonepaper.data.dto.UpdateNicknameRequest;
 import com.example.onedayonepaper.data.dto.UserInfoResponse;
 import com.example.onedayonepaper.data.dto.UserUpdateResponse;
+import com.example.onedayonepaper.data.dto.request.ChangeBookRequest;
 import com.example.onedayonepaper.data.dto.request.CreateGroupRequest;
 import com.example.onedayonepaper.data.dto.request.MemoRequest;
 import com.example.onedayonepaper.data.dto.response.BasicResponse;
 import com.example.onedayonepaper.data.dto.response.BookTotalPageResponse;
+import com.example.onedayonepaper.data.dto.response.GroupEditResponse;
 import com.example.onedayonepaper.data.dto.response.GroupsResponse;
 import com.example.onedayonepaper.data.dto.response.MemoListResponse;
 import com.example.onedayonepaper.data.dto.response.MyMemoResponse;
+import com.example.onedayonepaper.data.dto.response.OwnerResponse;
 
 import okhttp3.MultipartBody;
 import okhttp3.RequestBody;
@@ -84,4 +87,17 @@ public interface ApiService {
     Call<BasicResponse> deleteMemo(
             @Path("memoId") int memoId
     );
+
+    @GET("/groups/isOwner")
+    Call<OwnerResponse> isGroupOwner(@Query("groupId") int groupId);
+
+    @POST("/books")
+    Call<Void> changeBook(
+            @Query("groupId") int groupId,
+            @Body ChangeBookRequest request
+    );
+
+    @GET("/groups/forEdit")
+    Call<GroupEditResponse> getGroupForEdit(@Query("groupId") int groupId);
+
 }
