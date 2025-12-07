@@ -144,13 +144,13 @@ public class SignupActivity extends AppCompatActivity {
                 if (isValidId(etId.getText().toString().trim())) {
                     goNext();
                 } else {
-                    etId.setError("아이디는 5글자 이상");
+                    etId.setError("아이디는 3글자 이상");
                 }
             } else if (step == 1) {
                 if (isValidPwd(etPwd.getText().toString())) {
                     goNext();
                 } else {
-                    etPwd.setError("비밀번호는 5글자 이상");
+                    etPwd.setError("비밀번호는 3글자 이상");
                 }
             } else if (step == 2) {
                 if (isValidNic(etNic.getText().toString().trim())) {
@@ -263,18 +263,34 @@ public class SignupActivity extends AppCompatActivity {
 
     private void updateButtonEnabled() {
         int step = getStep();
+
+        boolean idOk  = isValidId(etId.getText().toString().trim());
+        boolean pwdOk = isValidPwd(etPwd.getText().toString());
+        boolean nicOk = isValidNic(etNic.getText().toString().trim());
+        boolean profileOk = isProfileSelected();
+
+        if (step == 0) {
+            etId.setActivated(idOk);
+        } else if (step == 1) {
+            etPwd.setActivated(pwdOk);
+        } else if (step == 2) {
+            etNic.setActivated(nicOk);
+        }
+
         boolean enable;
         if (step == 0) {
-            enable = isValidId(etId.getText().toString().trim());
+            enable = idOk;
         } else if (step == 1) {
-            enable = isValidPwd(etPwd.getText().toString());
+            enable = pwdOk;
         } else if (step == 2) {
-            enable = isValidNic(etNic.getText().toString().trim());
+            enable = nicOk;
         } else {
-            enable = isProfileSelected();
+            enable = profileOk;
         }
+
         checkBtn.setEnabled(enable);
     }
+
 
     private void hideKeyboard(View v) {
         android.view.inputmethod.InputMethodManager imm =
@@ -283,9 +299,9 @@ public class SignupActivity extends AppCompatActivity {
     }
 
     // 검증 규칙
-    private boolean isValidId(String s) { return s != null && s.length() > 4; }
-    private boolean isValidPwd(String s) { return s != null && s.length() > 5; }
-    private boolean isValidNic(String s) { return s != null && s.length() > 2; }
+    private boolean isValidId(String s) { return s != null && s.length() >= 3; }
+    private boolean isValidPwd(String s) { return s != null && s.length() >= 3; }
+    private boolean isValidNic(String s) { return s != null && s.length() >= 2; }
     private boolean isProfileSelected() { return selectedProfileUri != null; }
 
     private MultipartBody.Part createImagePartFromUri(Uri uri) {
