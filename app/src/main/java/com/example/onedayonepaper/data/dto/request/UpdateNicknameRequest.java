@@ -1,4 +1,4 @@
-package com.example.onedayonepaper.data.dto;
+package com.example.onedayonepaper.data.dto.request;
 
 public class UpdateNicknameRequest {
     private String nickName;

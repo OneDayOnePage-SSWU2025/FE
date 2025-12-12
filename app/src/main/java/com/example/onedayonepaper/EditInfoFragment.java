@@ -17,10 +17,10 @@ import androidx.fragment.app.Fragment;
 import com.bumptech.glide.Glide;
 import com.example.onedayonepaper.data.api.ApiClient;
 import com.example.onedayonepaper.data.api.ApiService;
-import com.example.onedayonepaper.data.dto.UpdateNicknameRequest;
-import com.example.onedayonepaper.data.dto.UserInfo;
-import com.example.onedayonepaper.data.dto.UserInfoResponse;
-import com.example.onedayonepaper.data.dto.UserUpdateResponse;
+import com.example.onedayonepaper.data.dto.request.UpdateNicknameRequest;
+import com.example.onedayonepaper.data.item.UserInfo;
+import com.example.onedayonepaper.data.dto.response.UserInfoResponse;
+import com.example.onedayonepaper.data.dto.response.UserUpdateResponse;
 
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;

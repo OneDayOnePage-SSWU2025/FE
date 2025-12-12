@@ -1,4 +1,4 @@
-package com.example.onedayonepaper.data.dto;
+package com.example.onedayonepaper.data.item;
 
 public class UserInfo {
 

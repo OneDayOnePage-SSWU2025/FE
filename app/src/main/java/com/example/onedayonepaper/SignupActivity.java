@@ -27,7 +27,7 @@ import android.text.TextWatcher;
 
 import com.example.onedayonepaper.data.api.ApiClient;
 import com.example.onedayonepaper.data.api.ApiService;
-import com.example.onedayonepaper.data.dto.SignUpResponse;
+import com.example.onedayonepaper.data.dto.response.SignUpResponse;
 
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;

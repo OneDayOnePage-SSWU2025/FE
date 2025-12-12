@@ -1,4 +1,4 @@
-package com.example.onedayonepaper.data.dto;
+package com.example.onedayonepaper.data.dto.response;
 
 public class SignUpResponse {
     private boolean success;

@@ -1,6 +1,5 @@
 package com.example.onedayonepaper;
 
-import android.content.Intent;
 import android.graphics.Typeface;
 import android.os.Bundle;
 import android.text.SpannableString;
@@ -21,10 +20,10 @@ import androidx.fragment.app.Fragment;
 import com.bumptech.glide.Glide;
 import com.example.onedayonepaper.data.api.ApiClient;
 import com.example.onedayonepaper.data.api.ApiService;
-import com.example.onedayonepaper.data.dto.ReportItem;
-import com.example.onedayonepaper.data.dto.ReportResponse;
-import com.example.onedayonepaper.data.dto.UserInfo;
-import com.example.onedayonepaper.data.dto.UserInfoResponse;
+import com.example.onedayonepaper.data.item.ReportItem;
+import com.example.onedayonepaper.data.dto.response.ReportResponse;
+import com.example.onedayonepaper.data.item.UserInfo;
+import com.example.onedayonepaper.data.dto.response.UserInfoResponse;
 
 import java.util.Locale;
 

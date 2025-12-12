@@ -1,13 +1,13 @@
 package com.example.onedayonepaper.data.api;
 
-import com.example.onedayonepaper.data.dto.HomeResponse;
-import com.example.onedayonepaper.data.dto.LoginRequest;
-import com.example.onedayonepaper.data.dto.LoginResponse;
-import com.example.onedayonepaper.data.dto.ReportResponse;
-import com.example.onedayonepaper.data.dto.SignUpResponse;
-import com.example.onedayonepaper.data.dto.UpdateNicknameRequest;
-import com.example.onedayonepaper.data.dto.UserInfoResponse;
-import com.example.onedayonepaper.data.dto.UserUpdateResponse;
+import com.example.onedayonepaper.data.dto.response.HomeResponse;
+import com.example.onedayonepaper.data.dto.request.LoginRequest;
+import com.example.onedayonepaper.data.dto.response.LoginResponse;
+import com.example.onedayonepaper.data.dto.response.ReportResponse;
+import com.example.onedayonepaper.data.dto.response.SignUpResponse;
+import com.example.onedayonepaper.data.dto.request.UpdateNicknameRequest;
+import com.example.onedayonepaper.data.dto.response.UserInfoResponse;
+import com.example.onedayonepaper.data.dto.response.UserUpdateResponse;
 import com.example.onedayonepaper.data.dto.request.CreateGroupRequest;
 import com.example.onedayonepaper.data.dto.request.MemoRequest;
 import com.example.onedayonepaper.data.dto.response.BasicResponse;

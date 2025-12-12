@@ -1,7 +1,5 @@
 package com.example.onedayonepaper;
 
-import static androidx.core.util.TypedValueCompat.dpToPx;
-
 import android.content.Context;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
@@ -9,7 +7,6 @@ import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.view.LayoutInflater;
-import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
@@ -27,7 +24,7 @@ import androidx.fragment.app.Fragment;
 import com.bumptech.glide.Glide;
 import com.example.onedayonepaper.data.api.ApiClient;
 import com.example.onedayonepaper.data.api.ApiService;
-import com.example.onedayonepaper.data.dto.UserInfoResponse;
+import com.example.onedayonepaper.data.dto.response.UserInfoResponse;
 import com.example.onedayonepaper.data.dto.request.MemoRequest;
 import com.example.onedayonepaper.data.dto.response.BookTotalPageResponse;
 

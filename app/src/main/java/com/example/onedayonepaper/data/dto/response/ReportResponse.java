@@ -1,6 +1,6 @@
-package com.example.onedayonepaper.data.dto;
+package com.example.onedayonepaper.data.dto.response;
 
-import java.util.List;
+import com.example.onedayonepaper.data.item.ReportItem;
 
 public class ReportResponse {
 

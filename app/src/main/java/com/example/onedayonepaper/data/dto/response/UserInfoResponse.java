@@ -1,4 +1,6 @@
-package com.example.onedayonepaper.data.dto;
+package com.example.onedayonepaper.data.dto.response;
+
+import com.example.onedayonepaper.data.item.UserInfo;
 
 public class UserInfoResponse {
 

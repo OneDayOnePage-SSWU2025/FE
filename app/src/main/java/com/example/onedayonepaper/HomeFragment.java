@@ -14,8 +14,8 @@ import androidx.viewpager2.widget.ViewPager2;
 
 import com.example.onedayonepaper.data.api.ApiClient;
 import com.example.onedayonepaper.data.api.ApiService;
-import com.example.onedayonepaper.data.dto.HomeGroupItem;
-import com.example.onedayonepaper.data.dto.HomeResponse;
+import com.example.onedayonepaper.data.item.HomeGroupItem;
+import com.example.onedayonepaper.data.dto.response.HomeResponse;
 import com.google.gson.Gson;
 
 import java.util.ArrayList;

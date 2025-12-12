@@ -18,8 +18,8 @@ import androidx.core.view.WindowInsetsCompat;
 
 import com.example.onedayonepaper.data.api.ApiClient;
 import com.example.onedayonepaper.data.api.ApiService;
-import com.example.onedayonepaper.data.dto.LoginRequest;
-import com.example.onedayonepaper.data.dto.LoginResponse;
+import com.example.onedayonepaper.data.dto.request.LoginRequest;
+import com.example.onedayonepaper.data.dto.response.LoginResponse;
 
 import retrofit2.Call;
 

@@ -84,11 +84,12 @@
         <TextView
             android:id="@+id/botInfoTitle"
             android:layout_width="240dp"
-            android:layout_height="60sp"
+            android:layout_height="60dp"
+
         android:maxLines="2"
         android:ellipsize="end"
-        android:text="책제목"
-        android:textSize="28sp"/>
+        android:text="dhkfhfkdddddhfkdhfkd 뫄올"
+        android:textSize="25sp"/>
 
         <View
             android:layout_width="0dp"
