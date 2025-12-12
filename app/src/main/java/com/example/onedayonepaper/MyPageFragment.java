@@ -10,6 +10,7 @@ import android.text.style.StyleSpan;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -36,6 +37,8 @@ public class MyPageFragment extends Fragment {
 
     ApiService apiService;
 
+    Button logoutBtn;
+
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater,
@@ -46,6 +49,11 @@ public class MyPageFragment extends Fragment {
 
         TextView bookCountTxt = v.findViewById(R.id.bookCountTxt);
         TextView memoCountTxt = v.findViewById(R.id.memoCountTxt);
+
+        logoutBtn = v.findViewById(R.id.logoutBtn); // 레이아웃에 logoutBtn ID가 있다고 가정
+        logoutBtn.setOnClickListener(view -> {
+            performLogout();
+        });
 
         apiService = ApiClient.getClient(requireContext()).create(ApiService.class);
 
@@ -142,6 +150,24 @@ public class MyPageFragment extends Fragment {
             span.setSpan(new StyleSpan(Typeface.BOLD), start, end, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
         }
         tv.setText(span);
+    }
+
+    private void performLogout() {
+        android.content.SharedPreferences prefs = requireContext()
+                .getSharedPreferences("auth", android.content.Context.MODE_PRIVATE);
+
+        android.content.SharedPreferences.Editor editor = prefs.edit();
+        editor.remove("jwt");
+        editor.apply();
+
+        Intent intent = new Intent(requireActivity(), MainPageActivity.class);
+
+        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
+
+        startActivity(intent);
+        requireActivity().finish();
+
+        Toast.makeText(requireContext(), "로그아웃 되었습니다.", Toast.LENGTH_SHORT).show();
     }
 
     @Override
