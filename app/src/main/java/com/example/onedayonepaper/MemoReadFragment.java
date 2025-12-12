@@ -101,7 +101,7 @@ public class MemoReadFragment extends Fragment {
         memoWriteBtn.setOnClickListener(v -> openMemoWritePage());
 
         loadTotalPage();
-
+        loadMemosByPage(currentPage);
         return view;
     }
 
