@@ -36,6 +36,7 @@
         android:layout_marginTop="20dp"
         android:background="@drawable/et_bg_round"
         android:backgroundTint="@color/et_tint_selector"
+        android:inputType="textPassword"
         android:hint="password"
         android:imeOptions="actionDone"
         android:paddingHorizontal="16dp"

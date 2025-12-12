@@ -187,7 +187,8 @@ public class SignupActivity extends AppCompatActivity {
                         if (response.isSuccessful() && response.body() != null) {
                             SignUpResponse body = response.body();
                             if (body.isSuccess()) {
-                                startActivity(new Intent(SignupActivity.this, MainActivity.class));
+                                Intent intent = new Intent(SignupActivity.this, CutsceneActivity.class);
+                                startActivity(intent);
                             } else {
                                 Toast.makeText(getApplicationContext(),
                                         "회원가입 실패: " + body.getMessage(),
