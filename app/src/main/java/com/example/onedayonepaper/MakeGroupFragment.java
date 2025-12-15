@@ -50,6 +50,7 @@ public class MakeGroupFragment extends Fragment {
     TextView tvSelectedBook;
     EditText etName, etCode;
     AppCompatButton btnCreate;
+    String TTB_KEY = "";
 
     private AladinBookItem selectedBook = null;
 
@@ -214,7 +215,6 @@ public class MakeGroupFragment extends Fragment {
 
     private void searchBooksFromAladin(String query) {
 
-        String TTB_KEY = "//TODO";
 
         AladinApiService api = AladinApiClient.getClient().create(AladinApiService.class);
 
@@ -263,7 +263,6 @@ public class MakeGroupFragment extends Fragment {
 
     private void searchBookInfoFromAladin(String isbn13) {
 
-        String TTB_KEY = "//TODO";
 
         AladinApiService api = AladinApiClient.getClient().create(AladinApiService.class);
 
