@@ -50,7 +50,7 @@ public class MakeGroupFragment extends Fragment {
     TextView tvSelectedBook;
     EditText etName, etCode;
     AppCompatButton btnCreate;
-    String TTB_KEY = "ttbquffl20021619001";
+    String TTB_KEY = "";
 
     private AladinBookItem selectedBook = null;
 
