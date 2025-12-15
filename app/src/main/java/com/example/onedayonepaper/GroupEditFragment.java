@@ -42,6 +42,7 @@ import retrofit2.Response;
 public class GroupEditFragment extends Fragment {
 
     private int groupId;
+    String TTB_KEY = "";
 
     EditText etName, etCode;
     Spinner spinnerTheme;
@@ -163,10 +164,9 @@ public class GroupEditFragment extends Fragment {
 
     private void searchBooks(String query) {
 
-        String KEY = "//TODO";
         AladinApiService api = AladinApiClient.getClient().create(AladinApiService.class);
 
-        api.searchBooks(KEY, query, "Title", "Book", 1, 10, "xml", "20131101")
+        api.searchBooks(TTB_KEY, query, "Title", "Book", 1, 10, "xml", "20131101")
                 .enqueue(new Callback<ResponseBody>() {
                     @Override
                     public void onResponse(Call<ResponseBody> call, Response<ResponseBody> res) {
@@ -233,10 +233,9 @@ public class GroupEditFragment extends Fragment {
 
     private void searchBookInfo(String isbn13) {
 
-        String KEY = "//TODO";
         AladinApiService api = AladinApiClient.getClient().create(AladinApiService.class);
 
-        api.lookupBook(KEY, "ISBN13", isbn13, "xml", "20131101", "authors,fulldescription")
+        api.lookupBook(TTB_KEY, "ISBN13", isbn13, "xml", "20131101", "authors,fulldescription")
                 .enqueue(new Callback<ResponseBody>() {
                     @Override
                     public void onResponse(Call<ResponseBody> call, Response<ResponseBody> res) {
