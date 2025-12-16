@@ -1,4 +1,5 @@
 package com.example.onedayonepaper;
+import android.app.Activity;
 import android.graphics.drawable.AnimationDrawable;
 import android.os.Bundle;
 import android.os.Handler;
@@ -6,7 +7,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.widget.ImageView;
 
 
-public class OnboardingActivity extends AppCompatActivity {
+public class OnboardingActivity extends Activity {
     private AnimationDrawable anim;
 
     @Override
@@ -26,7 +27,7 @@ public class OnboardingActivity extends AppCompatActivity {
             }
 
             new Handler().postDelayed(() -> {
-                startActivity(new android.content.Intent(this, MainActivity.class));
+                startActivity(new android.content.Intent(this, MainPageActivity.class));
                 finish();
             }, total + 300);
         });

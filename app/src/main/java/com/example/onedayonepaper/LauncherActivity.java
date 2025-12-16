@@ -1,13 +1,14 @@
 package com.example.onedayonepaper;
 
 
+import android.app.Activity;
 import android.app.Application;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import androidx.appcompat.app.AppCompatActivity;
 
-public class LauncherActivity extends AppCompatActivity {
+public class LauncherActivity extends Activity {
 
     private static boolean onboardingShownThisProcess = false;
 
@@ -19,7 +20,7 @@ public class LauncherActivity extends AppCompatActivity {
             onboardingShownThisProcess = true;
             startActivity(new Intent(this, OnboardingActivity.class));
         } else {
-            startActivity(new Intent(this, MainActivity.class));
+            startActivity(new Intent(this, MainPageActivity.class));
         }
         finish();
     }
