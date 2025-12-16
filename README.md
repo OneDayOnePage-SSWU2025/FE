@@ -84,6 +84,75 @@
 
 <br/>
 
+## 폴더 구조
+
+```
+📦 onedayonepaper
+├── .github
+│   ├── ISSUE_TEMPLATE
+│   │   └── issue-template.md
+│   └── PULL_REQUEST_TEMPLATE.md
+│
+├── .idea
+│
+├── 📱 app
+│   ├── src
+│   │   ├── androidTest
+│   │   │   └── java/com/example/onedayonepaper
+│   │   │       └── ExampleInstrumentedTest.java
+│   │   │
+│   │   ├── main
+│   │   │   ├── java/com/example/onedayonepaper
+│   │   │   │   ├── data
+│   │   │   │   │   ├── api
+│   │   │   │   │   │   ├── ApiClient.java
+│   │   │   │   │   │   ├── ApiService.java
+│   │   │   │   │   │   ├── AladinApiClient.java
+│   │   │   │   │   │   └── AladinApiService.java
+│   │   │   │   │   │
+│   │   │   │   │   ├── dto
+│   │   │   │   │   │   ├── request
+│   │   │   │   │   │   └── response
+│   │   │   │   │   │
+│   │   │   │   │   ├── item
+│   │   │   │   │   ├── mapper
+│   │   │   │   │   ├── pref
+│   │   │   │   │   └── AuthInterceptor.java
+│   │   │   │   │
+│   │   │   │   ├── ui
+│   │   │   │   │   ├── activity
+│   │   │   │   │   ├── fragment
+│   │   │   │   │   └── adapter
+│   │   │   │   │
+│   │   │   │   └── MainActivity.java
+│   │   │   │
+│   │   │   ├── res
+│   │   │   │   ├── layout
+│   │   │   │   ├── drawable
+│   │   │   │   ├── color
+│   │   │   │   ├── font
+│   │   │   │   ├── menu
+│   │   │   │   └── values
+│   │   │   │
+│   │   │   └── AndroidManifest.xml
+│   │   │
+│   │   └── test
+│   │       └── java/com/example/onedayonepaper
+│   │
+│   └── build.gradle.kts
+│
+├── gradle
+│   └── wrapper
+│
+├── build.gradle.kts
+├── gradle.properties
+├── settings.gradle.kts
+├── README.md
+└── .gitignore
+```
+
+<br/>
+
 ## 🍀💖 팀원 소개
 ### sswu Computer Engineering
 #### Team 안황
