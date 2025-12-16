@@ -4,7 +4,19 @@
         <item name="android:fontFamily">@font/scoredream7</item>
     </style>
 
-    <style name="Theme.OneDayOnePaper" parent="Base.Theme.OneDayOnePaper" />
+    <style name="Theme.OneDayOnePaper" parent="Theme.Material3.DayNight.NoActionBar">
+        <item name="android:statusBarColor">@color/white</item>
+    </style>
+
+    <style name="Theme.ODOP.Splash" parent="Theme.SplashScreen">
+
+        <item name="windowSplashScreenBackground">@color/white</item>
+
+        <item name="windowSplashScreenAnimatedIcon">@null</item>
+
+        <item name="postSplashScreenTheme">@style/Theme.OneDayOnePaper</item>
+
+    </style>
 
 
 </resources>
